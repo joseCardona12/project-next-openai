@@ -27,3 +27,5 @@ export const useUserStore = create<UserState>((set) => ({
 
   resetProgress: () => set({ responses: [], currentStep: 0 }),
 }));
+
+//testear datos
