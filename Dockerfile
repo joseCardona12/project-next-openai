@@ -6,7 +6,9 @@ WORKDIR /app
 
 # Copiar dependencias
 COPY package.json package-lock.json ./
+COPY prisma ./prisma/
 RUN npm install
+RUN npx prisma generate
 
 # Copiar el código fuente
 COPY . .
