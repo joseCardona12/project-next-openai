@@ -1,7 +1,39 @@
-import React from 'react';
+"use client"
+import React, { useState } from 'react';
+import { loginUser } from '@/app/infrastructure/services/authService';
 import styles from './LoginForm.module.scss';
 
 const LoginForm: React.FC = () => {
+
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    try {
+      
+      const user = await loginUser(name, password);
+      console.log('Login exitoso:', user);
+
+     
+      window.location.href = '/home';
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message); 
+      } else {
+        setError('Ocurrió un error desconocido');
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.card}>
@@ -11,9 +43,18 @@ const LoginForm: React.FC = () => {
           </h2>
           <h1>LOGIN</h1>
         </div>
-        <form>
+        <form onSubmit={handleLogin}>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          
           <div className={styles.inputGroup}>
-            <input type="text" id="name" placeholder="Name" />
+            <input
+              type="text"
+              id="name"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
             <span className={styles.icon}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -31,8 +72,16 @@ const LoginForm: React.FC = () => {
               </svg>
             </span>
           </div>
+
           <div className={styles.inputGroup}>
-            <input type="password" id="password" placeholder="Password" />
+            <input
+              type="password"
+              id="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
             <span className={styles.icon}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -50,8 +99,9 @@ const LoginForm: React.FC = () => {
               </svg>
             </span>
           </div>
-          <button type="submit" className={styles.button}>
-            SIGN IN
+
+          <button type="submit" className={styles.button} disabled={loading}>
+            {loading ? 'Cargando...' : 'SIGN IN'}
           </button>
         </form>
         <div className={styles.footer}>
