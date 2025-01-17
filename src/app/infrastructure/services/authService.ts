@@ -9,15 +9,6 @@ export interface User {
   password: string;
 }
 
-class AuthService {
-  public async login(){
-
-  }
-  public async register(){
-
-  }
-}
-
 export const registerUser = async (name: string, email: string, password: string) => {
   try {
     const response = await fetch(API_URL, {
