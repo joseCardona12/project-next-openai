@@ -1,7 +1,7 @@
-import React from 'react'
+import { LoginTemplate } from "@/ui/template/LoginTemplate";
 
-export default function Prueba() {
-  return (
-    <div>Prueba</div>
-  )
+export default function LoginView() {
+    return (
+       <LoginTemplate/>
+    )
 }
