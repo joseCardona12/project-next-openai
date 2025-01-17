@@ -1,6 +1,6 @@
 import React from 'react';
 import { useUserStore } from '../../../app/core/application/global-state/store';
-import ProgressBar from '@/ui/molecules/steps/ProgressBar';
+import ProgressBar from '@/ui/molecules/progressBar/ProgressBar';
 import StepOne from '@/ui/molecules/steps/stepOne';
 import StepTwo from '@/ui/molecules/steps/stepTwo';
 import StepThree from '@/ui/molecules/steps/stepThree';

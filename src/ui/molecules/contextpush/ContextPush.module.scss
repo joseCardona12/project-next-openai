@@ -1,14 +1,14 @@
-.stepContainer {
+.contextpush {
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #ffffff;
     padding: 2rem;
     border-radius: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 4px 4px 4px 6px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 400px;
-    margin: 0 auto;
+    // margin: 0 auto;
   }
   
   .header {
@@ -22,20 +22,18 @@
     }
   
     .title {
-        border: 1px solid #fbbf24;
-        border-radius: 12px;
+      border: 1px solid #fbbf24;
+      border-radius: 12px;
       font-size: 1rem;
       text-align: center;
       color: #4a4a4a;
+      padding: 12px;
     }
   }
   
   .optionsGrid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    width: 100%;
-    margin-bottom: 3rem;
+    
+    margin-bottom: 2rem;
   }
   
   .optionButton {
@@ -83,3 +81,7 @@
     }
   }
   
+  .icon {
+    border-radius: 50%; /* Hace la imagen redonda */
+    margin-bottom: 1rem; /* Añade espacio debajo de la imagen */
+  }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useUserStore } from '../../../app/core/application/global-state/store';
-import styles from './StepOne.module.scss';
+import styles from './Steps.module.scss';
+import Image from 'next/image';
 
 interface StepProps {
   onNext: () => void;
@@ -24,10 +25,12 @@ const StepOne: React.FC<StepProps> = ({ onNext }) => {
   return (
     <div className={styles.stepContainer}>
       <div className={styles.header}>
-        <img
-          src="/path/to/icon.svg"
-          alt="Training Icon"
+      <Image
+          src="/img/joseui.png"
+          alt="Jose Iu Smart"
           className={styles.icon}
+          width={150} // Ajusta el ancho
+          height={150} // Ajusta el alto
         />
     
 
