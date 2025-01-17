@@ -18,7 +18,7 @@ services:
     environment:
       # Define the database connection string for the app
     
-      DATABASE_URL: postgres://postgres:postgres@db:5432/nextjs_crud
+      DATABASE_URL: postgres://postgres:postgres@db:5432/nextjs_openai
     command: ["npm", "run", "dev"]
     # Ensure the app container starts only after the db container is ready
     depends_on:
