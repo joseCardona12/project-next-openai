@@ -4,7 +4,6 @@ import  {prisma}  from '@/lib/prisma'
 export async function POST(request: Request) {
     try{
         const {title} = await request.json();
-
         const newNote = await prisma.test.create({
             data: {
                 title,
