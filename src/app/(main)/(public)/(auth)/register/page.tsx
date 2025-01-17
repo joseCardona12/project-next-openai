@@ -1,7 +1,7 @@
-import React from 'react'
+import { RegisterTemplate } from "@/ui/template/RegisterTemplate";
 
-export default function page() {
-  return (
-    <div>page</div>
-  )
+export default function RegisterView() {
+    return (
+       <RegisterTemplate/>
+    )
 }
