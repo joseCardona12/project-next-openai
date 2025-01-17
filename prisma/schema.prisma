@@ -13,9 +13,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Test{
-  id String @id @default(cuid())
-  title String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Users{
+  id            Int         @id @default(autoincrement())
+  name          String
+  emial         String      @unique
+  password      String    
+  gender_id     Int         
+  gender        Genders     @relation(fields: [gender_id], references: [id])
+  createdAt     DateTime    @default(now())
 }
+
+model Genders{
+  id            Int          @id @default(autoincrement())
+  name          String       @unique
+  users         Users[]
+}
+
