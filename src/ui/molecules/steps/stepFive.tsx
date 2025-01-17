@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useUserStore } from '../../../state/store';
+import { useUserStore } from '../../../app/core/application/global-state/store';
 import styles from './StepOne.module.scss';
 
 interface StepProps {

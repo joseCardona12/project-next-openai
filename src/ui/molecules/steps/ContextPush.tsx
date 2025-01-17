@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useUserStore } from '../../../state/store';
+import { useUserStore } from '../../../app/core/application/global-state/store';
 import styles from './StepOne.module.scss';
 
 
@@ -17,15 +17,16 @@ const ContextPush: React.FC = () => {
         <h2 className={styles.title}>wait a moment, we are preparing your routine</h2>
       </div>
       <div className={styles.optionsGrid}>
-       
-    
+
+
       </div>
       <button
-className={styles.continueButton}
+        className={styles.continueButton}
       >
         <p>
-          enviar al resultado final de gpt
-          </p>
+
+          <a href="/exercises">Continue</a>
+        </p>
       </button>
     </div>
   );
