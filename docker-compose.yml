@@ -1,0 +1,52 @@
+# Use Docker Compose version 3.9 (latest stable version at the time of writing)
+version: '3.9'
+
+# Define the services (containers) that make up your application
+services:
+  # Service for the Next.js application
+  app:
+    # Build the Docker image using the Dockerfile in the current directory
+    build: .
+    # Map port 3000 on the host to port 3000 in the container
+    ports:
+      - '3000:3000'
+    # Hot reload
+    volumes:
+      - ./src:/app/src
+      - /app/node_modules
+    # Set environment variables for the app container
+    environment:
+      # Define the database connection string for the app
+    
+      DATABASE_URL: postgres://postgres:postgres@db:5432/nextjs_crud
+    command: ["npm", "run", "dev"]
+    # Ensure the app container starts only after the db container is ready
+    depends_on:
+      - db
+
+
+  # Service for the PostgreSQL database
+  db:
+    # Use the official PostgreSQL version 17 image
+    image: postgres:17-alpine
+    # Always restart the container if it stops (useful in development)
+    restart: always
+    # Set environment variables for the PostgreSQL database
+    environment:
+      # Database username
+      POSTGRES_USER: postgres
+      # Database password
+      POSTGRES_PASSWORD: postgres
+      # Database name
+      POSTGRES_DB: nextjs_openai
+    # Map port 5432 on the host to port 5432 in the container
+    ports:
+      - '5432:5432'
+    # Use a named volume to persist PostgreSQL data
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+# Define named volumes to persist data
+volumes:
+  # Volume for PostgreSQL data
+  postgres_data:
