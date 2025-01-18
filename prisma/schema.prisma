@@ -13,9 +13,73 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Test{
-  id String @id @default(cuid())
-  title String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Users{
+  id            Int         @id @default(autoincrement())
+  name          String
+  emial         String      @unique
+  password      String    
+  gender_id     Int         
+  gender        Genders     @relation(fields: [gender_id], references: [id])
+  createdAt     DateTime    @default(now())
+  contexts      Contexts[]
+  prompts       Prompts[]
+}
+
+model Genders{
+  id            Int          @id @default(autoincrement())
+  name          String       @unique
+  users         Users[]
+}
+
+model Age_ranges{
+  id            Int          @id @default(autoincrement())
+  name          String       @unique
+  contexts      Contexts[]
+}
+
+model Day_weeks{
+  id            Int          @id @default(autoincrement())
+  quantity_day  String       
+  contesxts     Contexts[]
+}
+
+model Current_levels{
+  id            Int          @id @default(autoincrement())
+  name          String 
+  contesxts     Contexts[]      
+}
+
+model Targets{
+  id            Int          @id @default(autoincrement())
+  name          String 
+  contexts     Contexts[]       
+}
+
+model Contexts{
+  id            Int         @id @default(autoincrement())
+  age_range_id  Int
+  day_week_id   Int
+  user_id       Int
+  current_level_id Int    
+  target_id     Int
+  age_range     Age_ranges     @relation(fields: [age_range_id], references: [id])
+  day_week      Day_weeks      @relation(fields: [day_week_id], references: [id]) 
+  user          Users      @relation(fields: [user_id], references: [id]) 
+  current_level  Current_levels      @relation(fields: [current_level_id], references: [id]) 
+  target        Targets  @relation(fields: [target_id], references: [id]) 
+}
+
+model Prompts {
+  id            Int          @id @default(autoincrement())
+  desciption    String
+  user_id       Int
+  user          Users        @relation(fields: [user_id], references: [id]) 
+  answer        Answers[]
+}
+
+model Answers {
+  id            Int          @id @default(autoincrement())
+  desciption    String
+  prompt_id     Int
+  prompt        Prompts      @relation(fields: [prompt_id], references: [id]) 
 }
