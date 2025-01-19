@@ -7,13 +7,13 @@ export class ClientHttpUtil implements ClientHttpPort {
   constructor(protocolClient?: string, hostClient?: string) {
     this.protocol = protocolClient || this.protocol;
     this.host = hostClient || this.host;
-  }
+  };
 
   private getHeaders(): Record<string, string> {
     return {
       "Content-Type": "application/json",
     };
-  }
+  };
 
   private managementError = async <T>(response: Response): Promise<T> => {
     const errorData = await response.json();
@@ -40,23 +40,23 @@ export class ClientHttpUtil implements ClientHttpPort {
     const headers: Record<string, string> = this.getHeaders();
     const response = await this.fetchApi(path, headers, "GET");
     return await this.managementError(response);
-  }
+  };
 
   public async post<T, B>(path: string, body: B): Promise<T> {
     const headers: Record<string, string> = this.getHeaders();
     const response = await this.fetchApi(path, headers, "POST", body);
     return await this.managementError(response);
-  }
+  };
 
   public async put<T, B>(path: string, body: B): Promise<T> {
     const headers: Record<string, string> = this.getHeaders();
     const response = await this.fetchApi(path, headers, "PUT", body);
     return await this.managementError(response);
-  }
+  };
 
   public async delete<T>(path: string): Promise<T> {
     const headers: Record<string, string> = this.getHeaders();
     const response = await this.fetchApi(path, headers, "DELETE");
     return await this.managementError(response);
-  }
-}
+  };
+};
