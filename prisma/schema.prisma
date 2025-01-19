@@ -40,13 +40,13 @@ model Age_ranges{
 model Day_weeks{
   id            Int          @id @default(autoincrement())
   quantity_day  String       
-  contesxts     Contexts[]
+  contexts     Contexts[]
 }
 
 model Current_levels{
   id            Int          @id @default(autoincrement())
   name          String 
-  contesxts     Contexts[]      
+  contexts     Contexts[]      
 }
 
 model Targets{
