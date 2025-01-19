@@ -39,4 +39,12 @@ class ClientHttpUtil {
     const response = await this.fetchApi(path, headers, "GET");
     return await this.managementError(response);
   }
+
+  public async post<T,B>(path: string, body:B): Promise<T> {
+    const headers: Record<string, string> = this.getHeaders();
+    const response = await this.fetchApi(path, headers, "POST", body);
+    return await this.managementError(response);
+  }
+
+
 }
