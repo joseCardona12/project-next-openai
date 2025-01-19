@@ -9,10 +9,16 @@ export class ClientHttpUtil implements ClientHttpPort {
     this.host = hostClient || this.host;
   };
 
-  private getHeaders(): Record<string, string> {
+  private getHeaders(apikey?:string): Record<string, string> {
+    if(!apikey){
+      return {
+        "Content-Type": "application/json",
+      };
+    }
     return {
       "Content-Type": "application/json",
-    };
+      "Authorization": `Bearer ${apikey}`
+    }
   };
 
   private managementError = async <T>(response: Response): Promise<T> => {
