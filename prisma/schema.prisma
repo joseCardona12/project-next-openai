@@ -83,3 +83,4 @@ model Answers {
   prompt_id     Int
   prompt        Prompts      @relation(fields: [prompt_id], references: [id]) 
 }
+
