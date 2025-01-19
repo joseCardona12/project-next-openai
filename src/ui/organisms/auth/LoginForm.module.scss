@@ -1,0 +1,99 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f3f4f6;
+  }
+  
+  .card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 22rem;
+    text-align: center;
+  }
+  
+  .header h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #4b5563;
+    margin-bottom: 0.5rem;
+  
+    span {
+      color: #fbbf24;
+      font-weight: bold;
+    }
+  }
+  
+  .header h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fbbf24;
+  }
+  
+  .inputGroup {
+    position: relative;
+    margin-bottom: 1.5rem;
+  
+    input {
+      width: 100%;
+      padding: 0.5rem 2.5rem 0.5rem 0.75rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      color: #6b7280;
+      background-color: #fff;
+      outline: none;
+      transition: border-color 0.3s;
+  
+      &:focus {
+        border-color: #fbbf24;
+        box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.3);
+      }
+    }
+  
+    .icon {
+      position: absolute;
+      top: 50%;
+      right: 0.75rem;
+      transform: translateY(-50%);
+      color: #fbbf24;
+    }
+  }
+  
+  .button {
+    width: 100%;
+    background-color: #fbbf24;
+    color: #fff;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  
+    &:hover {
+      background-color: #f59e0b;
+    }
+  }
+  
+  .footer {
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+  
+    a {
+      color: #fbbf24;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.3s;
+  
+      &:hover {
+        color: #f59e0b;
+      }
+    }
+  }
+  

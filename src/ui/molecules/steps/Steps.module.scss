@@ -1,0 +1,86 @@
+.stepContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 4px 4px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3rem;
+    gap: .5rem;
+  
+    .icon {
+      width: 40%;
+    }
+  
+    .title {
+      border: 1px solid #fbbf24;
+      border-radius: 12px;
+      font-size: 1rem;
+      text-align: center;
+      color: #4a4a4a;
+      padding: 12px;
+    }
+  }
+  
+  .optionsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    width: 100%;
+    margin-bottom: 3rem;
+  }
+  
+  .optionButton {
+    background-color: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  
+    &:hover {
+      background-color: #e5e7eb;
+    }
+  
+    &.selected {
+      background-color: #6b46c1;
+      color: #ffffff;
+      border-color: #6b46c1;
+    }
+  }
+  
+  .continueButton {
+    width: 100%;
+    background-color: #fbbf24;
+    color: #ffffff;
+    font-size: 1.125rem;
+    font-weight: 600;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  
+    &:hover {
+      background-color: #f59e0b;
+    }
+  
+    &.disabled {
+      background-color: #e5e7eb;
+      color: #a1a1aa;
+      cursor: not-allowed;
+    }
+  }
+  

@@ -1,12 +1,12 @@
 "use client"
-import Onboarding from "@/ui/molecules/onboarding/Onboarding";
+import ContextPush from "@/ui/molecules/contextpush/ContextPush";
 import DataCollection from "@/ui/organisms/dataCollection/DataCollection";
 
-export default function HomeView(){
+export default function ContextView(){
     return (
         <div className="containergeneral">
 
-            <Onboarding/>
+            <ContextPush/>
         </div>
     )
 }
