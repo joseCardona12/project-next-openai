@@ -16,7 +16,7 @@ datasource db {
 model Users{
   id            Int         @id @default(autoincrement())
   name          String
-  emial         String      @unique
+  email         String      @unique
   password      String    
   gender_id     Int         
   gender        Genders     @relation(fields: [gender_id], references: [id])
@@ -40,13 +40,13 @@ model Age_ranges{
 model Day_weeks{
   id            Int          @id @default(autoincrement())
   quantity_day  String       
-  contesxts     Contexts[]
+  contexts     Contexts[]
 }
 
 model Current_levels{
   id            Int          @id @default(autoincrement())
   name          String 
-  contesxts     Contexts[]      
+  contexts     Contexts[]      
 }
 
 model Targets{
