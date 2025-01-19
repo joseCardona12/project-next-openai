@@ -1,8 +1,12 @@
 "use client"
-import Onboarding from "@/ui/molecules/steps/Onboarding";
+import Onboarding from "@/ui/molecules/onboarding/Onboarding";
+import DataCollection from "@/ui/organisms/dataCollection/DataCollection";
 
 export default function HomeView(){
     return (
-       <Onboarding/>
+        <div className="containergeneral">
+
+            <Onboarding/>
+        </div>
     )
 }
