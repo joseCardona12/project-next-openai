@@ -11,7 +11,7 @@ interface StepProps {
 const StepOne: React.FC<StepProps> = ({ onNext }) => {
   const { addResponse } = useUserStore();
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const {contextState,setContextState} = useContextState((state)=>state);
+  const { contextState, setContextState } = useContextState((state) => state);
 
   const handleSelect = (response: string) => {
     setSelectedOption(response);
@@ -19,8 +19,9 @@ const StepOne: React.FC<StepProps> = ({ onNext }) => {
 
   const handleContinue = () => {
     if (selectedOption) {
+      console.log("select", selectedOption);
       addResponse(selectedOption);
-      setContextState([...contextState,selectedOption]);
+      setContextState([...contextState, selectedOption]);
       onNext();
     }
   };

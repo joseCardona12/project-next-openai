@@ -7,17 +7,24 @@ export interface IContextState {
 }
 
 export const useContextState = create<IContextState>()(
-  persist(
-    (set) => ({
-      contextState: [""],
-      setContextState: (value: string[]) =>
-        set(() => ({
-          contextState: value,
-        })),
-    }),
-    {
-      name: "context-state",
-      storage: createJSONStorage(() => localStorage),
-    }
-  )
+  (set) => ({
+    contextState: [],
+    setContextState: (value: string[]) =>
+      set(() => ({
+        contextState: value,
+      })),
+  })
+  //   persist(
+  //     (set) => ({
+  //       contextState: [""],
+  //       setContextState: (value: string[]) =>
+  //         set(() => ({
+  //           contextState: value,
+  //         })),
+  //     }),
+  //     {
+  //       name: "context-state",
+  //       storage: createJSONStorage(() => localStorage),
+  //     }
+  //   )
 );
