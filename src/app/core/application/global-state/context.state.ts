@@ -1,20 +1,23 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 export interface IContextState {
   contextState: string[];
   setContextState: (value: string[]) => void;
 }
 
-export const useContextState = create<IContextState>(
+export const useContextState = create<IContextState>()(
   persist(
     (set) => ({
       contextState: [""],
-      setContextState: (value: string[]) => set(() => ({ contextState: value })),
+      setContextState: (value: string[]) =>
+        set(() => ({
+          contextState: value,
+        })),
     }),
     {
-      name: "contextStateStorage",
-      getStorage: () => localStorage,
+      name: "context-state",
+      storage: createJSONStorage(() => localStorage),
     }
   )
 );
