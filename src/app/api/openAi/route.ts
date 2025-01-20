@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import openAiService from "@/app/api/services/openAi.service";
 
 export async function POST(req:NextRequest){
     const {prompt} = await req.json();
@@ -7,5 +8,6 @@ export async function POST(req:NextRequest){
         status: 400
     });
     
-
+    const data = await openAiService.createPrompt(prompt);
+    console.log(data);
 }
