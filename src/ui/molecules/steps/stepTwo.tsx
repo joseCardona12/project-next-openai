@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { useUserStore } from '../../../app/core/application/global-state/store';
+import { useUserStore } from '@/app/core/application/global-state/store';
 import styles from './Steps.module.scss';
 import Image from 'next/image';
+import { useContextState } from '@/app/core/application/global-state';
 
 interface StepProps {
   onNext: () => void;
@@ -10,6 +11,7 @@ interface StepProps {
 const StepTwo: React.FC<StepProps> = ({ onNext }) => {
   const { addResponse } = useUserStore();
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const {contextState,setContextState} = useContextState((state)=>state);
 
   const handleSelect = (response: string) => {
     setSelectedOption(response);
@@ -18,6 +20,7 @@ const StepTwo: React.FC<StepProps> = ({ onNext }) => {
   const handleContinue = () => {
     if (selectedOption) {
       addResponse(selectedOption);
+      setContextState([...contextState,selectedOption]);
       onNext();
     }
   };
