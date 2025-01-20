@@ -3,6 +3,7 @@ import styles from './Onboarding.module.scss';
 import Image from 'next/image';
 
 
+
 const Onboarding: React.FC = () => {
 
 
