@@ -1,6 +1,7 @@
 
-process.loadEnvFile();
 
-export const {
-    OPENAI_API_KEY: openAi_api_key = "secret"
-} = process.env;
+const openAi_api_key:string|undefined=process.env.OPENAI_API_KEY || "secret"
+
+export {
+    openAi_api_key
+}
