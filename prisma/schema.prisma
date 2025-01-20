@@ -13,73 +13,74 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Users{
+model User{
   id            Int         @id @default(autoincrement())
   name          String
-  emial         String      @unique
+  email         String      @unique
   password      String    
   gender_id     Int         
-  gender        Genders     @relation(fields: [gender_id], references: [id])
+  gender        Gender      @relation(fields: [gender_id], references: [id])
   createdAt     DateTime    @default(now())
-  contexts      Contexts[]
-  prompts       Prompts[]
+  contexts      Context[]
+  prompts       Prompt[]
 }
 
-model Genders{
+model Gender{
   id            Int          @id @default(autoincrement())
   name          String       @unique
-  users         Users[]
+  users         User[]
 }
 
-model Age_ranges{
+model Age_range{
   id            Int          @id @default(autoincrement())
   name          String       @unique
-  contexts      Contexts[]
+  contexts      Context[]
 }
 
-model Day_weeks{
+model Day_week{
   id            Int          @id @default(autoincrement())
   quantity_day  String       
-  contexts     Contexts[]
+  contexts     Context[]
 }
 
-model Current_levels{
+model Current_level{
   id            Int          @id @default(autoincrement())
   name          String 
-  contexts     Contexts[]      
+  contexts     Context[]      
 }
 
-model Targets{
+model Target{
   id            Int          @id @default(autoincrement())
   name          String 
-  contexts     Contexts[]       
+  contexts     Context[]       
 }
 
-model Contexts{
+model Context{
   id            Int         @id @default(autoincrement())
   age_range_id  Int
   day_week_id   Int
-  user_id       Int
+  user_id       Int         @unique
   current_level_id Int    
   target_id     Int
-  age_range     Age_ranges     @relation(fields: [age_range_id], references: [id])
-  day_week      Day_weeks      @relation(fields: [day_week_id], references: [id]) 
-  user          Users      @relation(fields: [user_id], references: [id]) 
-  current_level  Current_levels      @relation(fields: [current_level_id], references: [id]) 
-  target        Targets  @relation(fields: [target_id], references: [id]) 
+  age_ranges     Age_range     @relation(fields: [age_range_id], references: [id])
+  day_weeks      Day_week      @relation(fields: [day_week_id], references: [id]) 
+  users          User          @relation(fields: [user_id], references: [id]) 
+  current_levels  Current_level      @relation(fields: [current_level_id], references: [id]) 
+  targets        Target        @relation(fields: [target_id], references: [id]) 
 }
 
-model Prompts {
+model Prompt {
   id            Int          @id @default(autoincrement())
   desciption    String
   user_id       Int
-  user          Users        @relation(fields: [user_id], references: [id]) 
-  answer        Answers[]
+  users          User        @relation(fields: [user_id], references: [id]) 
+  answers        Answer[]
 }
 
-model Answers {
+model Answer {
   id            Int          @id @default(autoincrement())
   desciption    String
   prompt_id     Int
-  prompt        Prompts      @relation(fields: [prompt_id], references: [id]) 
+  prompts        Prompt      @relation(fields: [prompt_id], references: [id]) 
 }
+
