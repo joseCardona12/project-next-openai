@@ -59,7 +59,7 @@ model Context{
   id            Int         @id @default(autoincrement())
   age_range_id  Int
   day_week_id   Int
-  user_id       Int
+  user_id       Int         @unique
   current_level_id Int    
   target_id     Int
   age_ranges     Age_range     @relation(fields: [age_range_id], references: [id])
