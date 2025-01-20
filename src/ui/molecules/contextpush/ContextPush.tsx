@@ -1,13 +1,6 @@
-<<<<<<< HEAD:src/ui/molecules/steps/ContextPush.tsx
 
-import styles from './StepOne.module.scss';
-
-=======
-import React, { useState } from 'react';
-import { useUserStore } from '../../../app/core/application/global-state/store';
 import styles from './ContextPush.module.scss';
 import Image from 'next/image';
->>>>>>> a23999e3df32a75de791e0d4d77e7750b21d9661:src/ui/molecules/contextpush/ContextPush.tsx
 
 const ContextPush: React.FC = () => {
 
