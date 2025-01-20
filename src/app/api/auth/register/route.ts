@@ -6,6 +6,13 @@ export async function POST(request:Request) {
     try{
         const data = await request.json();
 
+        if(!data.email || !data.name || !data.password ||  !data.gender_id){
+            return NextResponse.json(
+                {error: "name, gender, email and password are required"},
+                { status: 400 }
+            )
+        }
+
         const userFound = await prisma.user.findUnique({
             where: {
                 email: data.email
@@ -36,7 +43,7 @@ export async function POST(request:Request) {
                 message: 'User created',
                 user: user,
             },
-            { status: 200 }
+            { status: 201 }
         );
     }
     catch(error){

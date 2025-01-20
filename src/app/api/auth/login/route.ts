@@ -43,6 +43,7 @@ export async function POST (request: Request){
     
         const token = jwt.sign({
             exp: Math.floor(Date.now() /1000) + 60 * 60 ,
+            id: user.id,
             name: user.name,
             email: email
         }, process.env.JWT_KEY);
