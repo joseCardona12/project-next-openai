@@ -1,0 +1,45 @@
+import  {prisma}  from '@/lib/prisma'
+import { NextResponse } from 'next/server';
+import bcrypt from 'bcrypt'
+
+export async function POST(request:Request) {
+    try{
+        const data = await request.json();
+
+        const userFound = await prisma.user.findUnique({
+            where: {
+                email: data.email
+            }
+        })
+    
+        if(userFound){
+            return NextResponse.json(
+                { message: "Email already registered"}, 
+                { status: 400})
+        }
+    
+        const hasehdPassword = await bcrypt.hash(data.password, 10)
+    
+        const newUser = await prisma.user.create({
+            data: {
+                name: data.name,
+                email: data.email,
+                password: hasehdPassword,
+                gender_id: data.gender_id
+            }
+        })
+    
+        const {password: _, ...user} = newUser
+    
+        return NextResponse.json(user)
+    }
+    catch(error){
+        if(error instanceof Error){
+            return NextResponse.json(
+                {message: error.message},
+                {status: 500}
+            )
+        }
+    }
+}
+    

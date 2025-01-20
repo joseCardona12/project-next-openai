@@ -19,13 +19,13 @@ model User{
   email         String      @unique
   password      String    
   gender_id     Int         
-  gender        Genders     @relation(fields: [gender_id], references: [id])
+  gender        Gender      @relation(fields: [gender_id], references: [id])
   createdAt     DateTime    @default(now())
   contexts      Context[]
   prompts       Prompt[]
 }
 
-model Genders{
+model Gender{
   id            Int          @id @default(autoincrement())
   name          String       @unique
   users         User[]
