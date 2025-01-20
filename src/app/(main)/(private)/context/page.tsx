@@ -1,8 +1,8 @@
 "use client";
-import ContextPush from "@/ui/molecules/steps/ContextPush";
+
+import ContextPush from "@/ui/molecules/contextpush/ContextPush";
 
 export default function ContextView() {
-  const {} = useContextState((state) => state);
   return (
     <div className="containergeneral">
       <ContextPush />
