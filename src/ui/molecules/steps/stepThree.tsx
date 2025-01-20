@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { useUserStore } from '../../../app/core/application/global-state/store';
+import { useUserStore } from '@/app/core/application/global-state/store';
 import styles from './Steps.module.scss';
 import Image from 'next/image';
+import { useContextState } from '@/app/core/application/global-state';
 
 interface StepProps {
   onNext: () => void;
@@ -10,6 +11,7 @@ interface StepProps {
 const StepThree: React.FC<StepProps> = ({ onNext }) => {
   const { addResponse } = useUserStore();
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const {contextState,setContextState} = useContextState((state)=>state);
 
   const handleSelect = (response: string) => {
     setSelectedOption(response);
@@ -18,6 +20,7 @@ const StepThree: React.FC<StepProps> = ({ onNext }) => {
   const handleContinue = () => {
     if (selectedOption) {
       addResponse(selectedOption);
+      setContextState([...contextState,selectedOption]);
       onNext();
     }
   };
@@ -38,33 +41,33 @@ const StepThree: React.FC<StepProps> = ({ onNext }) => {
       </div>
       <div className={styles.optionsGrid}>
         <button
-          onClick={() => handleSelect('Lose Weight')}
+          onClick={() => handleSelect('14-18')}
           className={`${styles.optionButton} ${
-            selectedOption === 'Lose Weight' ? styles.selected : ''
+            selectedOption === '14-18' ? styles.selected : ''
           }`}
         >
           <span>14-18</span>
         </button>
         <button
-          onClick={() => handleSelect('Gain Muscle')}
+          onClick={() => handleSelect('19-29')}
           className={`${styles.optionButton} ${
-            selectedOption === 'Gain Muscle' ? styles.selected : ''
+            selectedOption === '19-29' ? styles.selected : ''
           }`}
         >
           <span>19-29</span>
         </button>
         <button
-          onClick={() => handleSelect('Improve Endurance')}
+          onClick={() => handleSelect('30-39')}
           className={`${styles.optionButton} ${
-            selectedOption === 'Improve Endurance' ? styles.selected : ''
+            selectedOption === '30-39' ? styles.selected : ''
           }`}
         >
           <span>30-39</span>
         </button>
         <button
-          onClick={() => handleSelect('Flexibility')}
+          onClick={() => handleSelect('from 40 onwards')}
           className={`${styles.optionButton} ${
-            selectedOption === 'Flexibility' ? styles.selected : ''
+            selectedOption === 'from 40 onwards' ? styles.selected : ''
           }`}
         >
           <span>from 40 onwards</span>
