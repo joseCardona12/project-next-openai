@@ -36,12 +36,16 @@ export async function POST(request:Request) {
             }
         })
     
-        const {password: _, ...user} = newUser
+        const postedUser = {
+            name: data.name,
+            email: data.email,
+            gender_id: data.gender_id
+        }
     
         return NextResponse.json(
             {
                 message: 'User created',
-                user: user,
+                user: postedUser,
             },
             { status: 201 }
         );

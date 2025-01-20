@@ -50,7 +50,9 @@ export async function POST(request: Request) {
             );
     
         } catch(error){
-            return NextResponse.json({ error: 'Invalid token' }, { status: 403 });
+            if(error instanceof Error){
+                return NextResponse.json({ error: 'Invalid token' }, { status: 403 });
+            }
         }
     }
     catch(error){
