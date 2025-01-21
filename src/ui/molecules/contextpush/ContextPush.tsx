@@ -1,4 +1,4 @@
-import styles from "./StepOne.module.scss";
+import styles from "../steps/Steps.module.scss";
 import Image from "next/image";
 
 const ContextPush: React.FC = () => {
