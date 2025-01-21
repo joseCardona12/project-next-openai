@@ -27,7 +27,7 @@ class OpenAiService{
             const response = await this.openAi.chat.completions.create({
                 model: "gpt-4",
                 messages: [
-                    {role: "system", content: "Eres un experto en ejercicios y Smart Fit. Solo responde preguntas relacionadas con estos temas."},
+                    {role: "system", content: ""},
                     {role: "user", content: prompt}
                 ]
             });
