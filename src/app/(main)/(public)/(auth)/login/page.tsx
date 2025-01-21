@@ -1,9 +1,21 @@
-import OpenAiService from "@/app/infrastructure/services/openAi.service";
+"use client";
 import { LoginTemplate } from "@/ui/template/LoginTemplate";
+import { useEffect } from "react";
 
 export default function LoginView() {
-  OpenAiService.createPrompt(
-    "Mi objetivo es bajar de peso, soy sedentario, tengo entre 19-29 años, quiero 3-4 dias en la semana, puedo dedciar a la session 30min. Necesito que me respondas los ejercicios en un formato json con las propiedades: name, numberSecond,series, urlimageRandom"
-  );
+  const prompt: string = "dame una rutina";
+  useEffect(() => {
+    const postPrompt = async () => {
+      const response = await fetch("http://localhost:3000/api/openAi", {
+        method: "POST",
+        body: JSON.stringify({
+          prompt,
+        }),
+      });
+      const data = await response.json();
+      console.log("data", data);
+    };
+    postPrompt();
+  });
   return <LoginTemplate />;
 }

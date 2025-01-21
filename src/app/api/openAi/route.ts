@@ -8,6 +8,5 @@ export async function POST(req:NextRequest){
         status: 400
     });
     
-    const data = await openAiService.createPrompt(prompt);
-    console.log(data);
+    await openAiService.createPrompt(prompt);
 }

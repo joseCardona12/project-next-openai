@@ -11,12 +11,8 @@ class OpenAiService {
     });
   }
 
-  public async createPrompt(prompt: string): Promise<NextResponse> {
-    if (!this.openai) {
-      return NextResponse.json({
-        message: "Error with environment variable",
-      });
-    }
+  public async createPrompt(prompt: string): Promise<string>{
+    if (!this.openai) return "openAi";
     try {
       const response = await this.openai.chat.completions.create({
         model: "gpt-4o-mini",
