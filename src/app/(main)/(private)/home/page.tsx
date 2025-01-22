@@ -1,11 +1,13 @@
-import React from "react";
+import { Layout } from "@/ui/template/home/layout"
+import { Hero } from "@/ui/organisms/home/hero"
+import { Features } from "@/ui/organisms/home/features"
 
-const Home: React.FC = () => {
+export default function Home() {
   return (
-    <div>
-      <h1>¡Hola, Bienvenido a la Aplicación!</h1>
-    </div>
-  );
-};
+    <Layout>
+      <Hero />
+      <Features />
+    </Layout>
+  )
+}
 
-export default Home;

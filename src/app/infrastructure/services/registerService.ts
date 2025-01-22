@@ -6,7 +6,7 @@ export interface RegisterUserData {
 }
 
 export const registerUser = async (data: RegisterUserData) => {
-    const API_URL = '/api/register'; // URL relativa
+    const API_URL = '/api/auth/register'; // URL relativa
 
     try {
         const response = await fetch(API_URL, {

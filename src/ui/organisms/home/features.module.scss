@@ -1,0 +1,27 @@
+
+
+.features-section {
+    width: 100%;
+    padding-top: 3rem; 
+    padding-bottom: 3rem; 
+  }
+  
+  .container {
+    padding-left: 1rem; 
+    padding-right: 1rem; 
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem; 
+  }
+  
+  .grid-md {
+    grid-template-columns: repeat(3, 1fr); 
+  }
+  
+  .items-start {
+    align-items: flex-start;
+  }
+  

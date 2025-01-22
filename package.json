@@ -13,12 +13,15 @@
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "font-awesome": "^4.7.0",
     "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.473.0",
     "next": "15.1.4",
     "openai": "^4.78.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sass": "^1.83.4",
+    "tailwindcss-animate": "^1.0.7",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
@@ -28,6 +31,7 @@
     "@types/node": "^20.17.14",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/react-icons": "^3.0.0",
     "eslint": "^9",
     "eslint-config-next": "15.1.4",
     "postcss": "^8",
