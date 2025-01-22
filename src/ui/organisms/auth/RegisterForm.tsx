@@ -1,16 +1,16 @@
-"use client"
+'use client'
+
 import React, { useState } from 'react';
-import { registerUser } from '@/app/infrastructure/services/authService';
+import { registerUser } from '@/app/infrastructure/services/registerService';
 import styles from './RegisterForm.module.scss';
 
 const RegisterForm: React.FC = () => {
-
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [genderId, setGenderId] = useState<number>(1); // Default to "1" (Hombre)
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,11 +18,10 @@ const RegisterForm: React.FC = () => {
     setError('');
 
     try {
-      
-      const newUser = await registerUser(name, email, password);
+      const newUser = await registerUser({ name, email, password, gender_id: genderId });
       console.log('Registro exitoso:', newUser);
 
-     
+      // Redirigir al usuario después de un registro exitoso
       window.location.href = '/dashboard';
     } catch (err: unknown) {
       if (err instanceof Error) {
@@ -46,7 +45,7 @@ const RegisterForm: React.FC = () => {
         </div>
         <form onSubmit={handleRegister}>
           {error && <p style={{ color: 'red' }}>{error}</p>}
-          
+
           <div className={styles.inputGroup}>
             <input
               type="text"
@@ -126,6 +125,20 @@ const RegisterForm: React.FC = () => {
                 />
               </svg>
             </span>
+          </div>
+
+          {/* Gender Selector */}
+          <div className={styles.inputGroup}>
+            <label htmlFor="gender">Gender</label>
+            <select
+              id="gender"
+              value={genderId}
+              onChange={(e) => setGenderId(Number(e.target.value))} // Convert value to number
+              required
+            >
+              <option value={1}>Hombre</option>
+              <option value={2}>Mujer</option>
+            </select>
           </div>
 
           <button type="submit" className={styles.button} disabled={loading}>

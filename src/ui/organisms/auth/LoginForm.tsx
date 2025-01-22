@@ -1,15 +1,15 @@
-"use client"
+'use client'
+
 import React, { useState } from 'react';
 import { loginUser } from '@/app/infrastructure/services/authService';
 import styles from './LoginForm.module.scss';
 
 const LoginForm: React.FC = () => {
 
-  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,15 +17,14 @@ const LoginForm: React.FC = () => {
     setError('');
 
     try {
-      
-      const user = await loginUser(name, password);
+
+      const user = await loginUser(email, password);
       console.log('Login exitoso:', user);
 
-     
       window.location.href = '/home';
     } catch (err: unknown) {
       if (err instanceof Error) {
-        setError(err.message); 
+        setError(err.message);  
       } else {
         setError('Ocurrió un error desconocido');
       }
@@ -44,15 +43,16 @@ const LoginForm: React.FC = () => {
           <h1>LOGIN</h1>
         </div>
         <form onSubmit={handleLogin}>
+          {/* Mostrar mensaje de error si existe */}
           {error && <p style={{ color: 'red' }}>{error}</p>}
           
           <div className={styles.inputGroup}>
             <input
-              type="text"
-              id="name"
-              placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              type="email"
+              id="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
             <span className={styles.icon}>
