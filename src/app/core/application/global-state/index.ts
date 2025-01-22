@@ -1,6 +1,8 @@
 // Barril file
 import { useContextState } from "./context.state";
+import { useUserState } from "./user.state";
 
 export {
     useContextState,
+    useUserState
 }
