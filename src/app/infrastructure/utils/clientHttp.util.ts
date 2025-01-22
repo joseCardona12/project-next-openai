@@ -9,7 +9,7 @@ export class ClientHttpUtil implements ClientHttpPort {
     this.host = hostClient || this.host;
   };
 
-  private getHeaders(): Record<string, string> {
+  private getHeaders(apikey?:string): Record<string, string> {
     return {
       "Content-Type": "application/json",
     };
