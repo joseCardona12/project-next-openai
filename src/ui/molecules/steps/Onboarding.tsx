@@ -1,4 +1,4 @@
-import styles from './StepOne.module.scss';
+import styles from '../steps/Steps.module.scss';
 
 
 const Onboarding: React.FC = () => {
