@@ -1,11 +1,11 @@
 "use client"
 import React, { useState } from 'react';
-import { loginUser } from '@/app/infrastructure/services/authService';
 import styles from './LoginForm.module.scss';
+import { AuthService } from '@/app/infrastructure/services';
 
 const LoginForm: React.FC = () => {
 
-  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -16,20 +16,17 @@ const LoginForm: React.FC = () => {
     setLoading(true);
     setError('');
 
-    try {
-      
-      const user = await loginUser(name, password);
+    try{
+      const user = await AuthService.login({email, password});
       console.log('Login exitoso:', user);
 
-     
-      window.location.href = '/home';
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message); 
-      } else {
-        setError('Ocurrió un error desconocido');
+    }catch(error:unknown){
+      if(error instanceof Error){
+        setError("Invalid credentials");
+      }else{
+        setError('An unexpected error occurred');
       }
-    } finally {
+    }finally{
       setLoading(false);
     }
   };
@@ -51,8 +48,8 @@ const LoginForm: React.FC = () => {
               type="text"
               id="name"
               placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
             <span className={styles.icon}>

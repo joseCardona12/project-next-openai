@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import { registerUser } from '@/app/infrastructure/services/authService';
+import { registerUser } from '@/app/infrastructure/services/authService.tst';
 import styles from './RegisterForm.module.scss';
 
 const RegisterForm: React.FC = () => {
