@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import styles from './LoginForm.module.scss';
 import { AuthService } from '@/app/infrastructure/services';
+import { ILoginResponseError, ILoginResponseSuccess } from '@/app/core/application/dto';
+import { useUserState } from '@/app/core/application/global-state';
 
 const LoginForm: React.FC = () => {
 
@@ -9,6 +11,7 @@ const LoginForm: React.FC = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const {setUser} = useUserState((state)=>state);
 
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -16,19 +19,17 @@ const LoginForm: React.FC = () => {
     setLoading(true);
     setError('');
 
-    try{
-      const user = await AuthService.login({email, password});
-      console.log('Login exitoso:', user);
-
-    }catch(error:unknown){
-      if(error instanceof Error){
-        setError("Invalid credentials");
-      }else{
-        setError('An unexpected error occurred');
-      }
-    }finally{
-      setLoading(false);
+    const userLogged :ILoginResponseError | ILoginResponseSuccess  = await AuthService.login({email, password});
+    if("error" in userLogged){
+      setError(userLogged.error);
+      return;
     }
+    const {message,token,user} = userLogged;
+    console.log("message",message);
+    setUser({
+      token,
+      user
+    });
   };
 
   return (

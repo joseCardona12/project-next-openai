@@ -1,10 +1,14 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { IAuthUser } from "@/app/core/application/dto/loginResponseSuccess.dto";
+import {ILoginResponseUser } from "@/app/core/application/dto/loginResponseSuccess.dto";
 
+interface IUser{
+    token:string,
+    user: ILoginResponseUser
+}
 interface UserState {
-    user: IAuthUser | null;
-    setUser: (user: IAuthUser | null) => void;
+    user: IUser | null;
+    setUser: (user: IUser | null) => void;
     removeUser: () => void;
 };
 

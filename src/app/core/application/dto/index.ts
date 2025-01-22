@@ -1,21 +1,17 @@
 // Barril file
 import type { ILoginRequest } from "./loginRequest.dto";
-import type { ILoginResponseError, ILoginResponseErrorCatch } from "./loginResponseError.dto";
-import type { ILoginResponseSuccess, IResponse, IAuthUser } from "./loginResponseSuccess.dto";
+import type { ILoginResponseError } from "./loginResponseError.dto";
+import type { ILoginResponseSuccess } from "./loginResponseSuccess.dto";
 import type { IRegisterRequest } from "./registerRequest.dto";
-import type { IRegisterResponseError, IRegisterResponseErrorCatch } from "./registerResponseError.dto";
+import type { IRegisterResponseError } from "./registerResponseError.dto";
 import type { IPostedUser, IRegisterResponseSuccess, IRegisterResponse} from "./registerResponseSuccess.dto";
 
 export {
     ILoginRequest, 
-    ILoginResponseError,  
-    ILoginResponseErrorCatch,
+    ILoginResponseError,
     ILoginResponseSuccess,
-    IResponse,
-    IAuthUser,
     IRegisterRequest,
     IRegisterResponseError,
-    IRegisterResponseErrorCatch,
     IPostedUser,
     IRegisterResponseSuccess,
     IRegisterResponse

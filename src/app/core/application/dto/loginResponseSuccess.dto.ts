@@ -1,17 +1,12 @@
 
 export interface ILoginResponseSuccess{
-    response: IResponse,
-    status:number,
-}
-
-export interface IResponse{
     message:string,
-    user: IAuthUser,
+    token:string,
+    user:ILoginResponseUser
 }
 
-export interface IAuthUser{
+export interface ILoginResponseUser{
+    email:string,
     id:number,
     name:string,
-    email:string,
-    jwt:string,
 }

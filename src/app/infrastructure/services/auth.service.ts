@@ -1,4 +1,4 @@
-import { ILoginRequest, ILoginResponseError, ILoginResponseErrorCatch, ILoginResponseSuccess, IRegisterRequest, IRegisterResponseError, IRegisterResponseErrorCatch, IRegisterResponseSuccess } from "@/app/core/application/dto";
+import { ILoginRequest, ILoginResponseError, ILoginResponseSuccess, IRegisterRequest, IRegisterResponseError, IRegisterResponseSuccess } from "@/app/core/application/dto";
 import { AuthPort } from "@/app/core/application/ports";
 import { ClientHttpUtil } from "@/app/infrastructure/utils/clientHttp.util";
 
@@ -8,12 +8,14 @@ class AuthService implements AuthPort{
     constructor(){
         this.clientHttpUtil = new ClientHttpUtil();
     };
-    public async login(data: ILoginRequest): Promise<ILoginResponseError | ILoginResponseErrorCatch | ILoginResponseSuccess> {
-        return await this.clientHttpUtil.post<ILoginResponseError | ILoginResponseErrorCatch | ILoginResponseSuccess,ILoginRequest >("auth/login", data);
+    public async login(data: ILoginRequest): Promise<ILoginResponseError | ILoginResponseSuccess> {
+        const response = this.clientHttpUtil.post<ILoginResponseError | ILoginResponseSuccess,ILoginRequest >("auth/login", data);
+        console.log("response", response);
+        return response;    
     };
 
-    public async register(data: IRegisterRequest): Promise<IRegisterResponseError | IRegisterResponseErrorCatch | IRegisterResponseSuccess> {
-        return await this.clientHttpUtil.post<IRegisterResponseError | IRegisterResponseErrorCatch | IRegisterResponseSuccess, IRegisterRequest>("auth/register", data);
+    public async register(data: IRegisterRequest): Promise<IRegisterResponseError | IRegisterResponseSuccess> {
+        return await this.clientHttpUtil.post<IRegisterResponseError | IRegisterResponseSuccess, IRegisterRequest>("auth/register", data);
     };
 };
 

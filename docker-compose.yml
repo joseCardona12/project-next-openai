@@ -3,32 +3,6 @@ version: '3.9'
 
 # Define the services (containers) that make up your application
 services:
-  # Service for the Next.js application
-  app:
-    # Build the Docker image using the Dockerfile in the current directory
-    build: .
-    # Map port 3000 on the host to port 3000 in the container
-    ports:
-      - '3000:3000'
-    # Hot reload
-    volumes:
-      - ./src:/app/src
-      - /app/node_modules
-    # Set environment variables for the app container
-    environment:
-      # Define the database connection string for the app
-    
-      DATABASE_URL: postgres://postgres:postgres@db:5432/nextjs_openai
-
-    env_file:
-      - .env
-      
-    command: ["npm", "run", "dev"]
-    # Ensure the app container starts only after the db container is ready
-    depends_on:
-      - db
-
-
   # Service for the PostgreSQL database
   db:
     # Use the official PostgreSQL version 17 image
@@ -49,6 +23,37 @@ services:
     # Use a named volume to persist PostgreSQL data
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    # Health check for the PostgreSQL database
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Service for the Next.js application
+  app:
+    # Build the Docker image using the Dockerfile in the current directory
+    build: .
+    # Map port 3000 on the host to port 3000 in the container
+    ports:
+      - '3000:3000'
+    # Hot reload
+    volumes:
+      - ./src:/app/src
+      - /app/node_modules
+    # Set environment variables for the app container
+    environment:
+      # Define the database connection string for the app
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/nextjs_openai
+    # Load environment variables from the .env file
+    env_file:
+      - .env
+    # Ensure the app container starts only after the db container is ready and healthy
+    depends_on:
+      db:
+        condition: service_healthy
+    # Run the Prisma migration and start the development server
+    command: sh -c "npx prisma migrate deploy && npm run dev"
 
 # Define named volumes to persist data
 volumes:

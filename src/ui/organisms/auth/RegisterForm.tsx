@@ -1,7 +1,8 @@
 "use client"
 import React, { useState } from 'react';
-import { registerUser } from '@/app/infrastructure/services/authService.tst';
 import styles from './RegisterForm.module.scss';
+import { AuthService } from '@/app/infrastructure/services';
+import { useRouter } from 'next/navigation';
 
 const RegisterForm: React.FC = () => {
 
@@ -10,7 +11,7 @@ const RegisterForm: React.FC = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-
+  const router = useRouter();
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,11 +20,10 @@ const RegisterForm: React.FC = () => {
 
     try {
       
-      const newUser = await registerUser(name, email, password);
+      const newUser = await AuthService.register({name,email,password,gender_id:1});
       console.log('Registro exitoso:', newUser);
+      router.push("/dashboard");
 
-     
-      window.location.href = '/dashboard';
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
