@@ -1,8 +1,8 @@
 import { ClientHttpPort } from "@/app/core/application/ports";
 
 export class ClientHttpUtil implements ClientHttpPort {
-  private protocol: string = "https";
-  private host: string = "677b27f620824100c078db4c.mockapi.io/"; //Change host
+  private protocol: string = "http";
+  private host: string = "localhost:3000"; //Change host
 
   constructor(protocolClient?: string, hostClient?: string) {
     this.protocol = protocolClient || this.protocol;
@@ -28,7 +28,7 @@ export class ClientHttpUtil implements ClientHttpPort {
     method: string,
     bodyClient?: B
   ): Promise<Response> => {
-    return await fetch(`${this.protocol}://${this.host}/api/v1/${path}`, {
+    return await fetch(`${this.protocol}://${this.host}/api/${path}`, {
       headers,
       method,
       body: bodyClient ? JSON.stringify(bodyClient) : undefined,
