@@ -122,3 +122,60 @@ El sistema utiliza JWT para la autenticación. El flujo es el siguiente:
 - `POST /api/context`: Creación de contexto de entrenamiento
 - `POST /api/answer`: Generación de respuestas con OpenAI
 
+## 🐳 Ejecutar con Docker
+
+### Prerequisitos
+- Docker
+- Docker Compose
+
+### Pasos para ejecutar con Docker
+
+1. **Construir y levantar los contenedores**:
+```bash
+docker-compose up --build
+```
+
+2. **Para ejecutar en segundo plano**:
+```bash
+docker-compose up -d
+```
+
+3. **Para ver los logs**:
+```bash
+docker-compose logs -f
+```
+
+4. **Para detener los contenedores**:
+```bash
+docker-compose down
+```
+
+### Comandos Docker útiles
+
+- **Reiniciar los contenedores**:
+```bash
+docker-compose restart
+```
+
+- **Ver el estado de los contenedores**:
+```bash
+docker-compose ps
+```
+
+- **Ejecutar comandos en el contenedor de la aplicación**:
+```bash
+docker-compose exec app sh
+```
+
+- **Ver logs de un servicio específico**:
+```bash
+docker-compose logs -f app  # para la aplicación
+docker-compose logs -f db   # para la base de datos
+```
+
+### Notas importantes sobre Docker
+
+1. La base de datos PostgreSQL se ejecuta en un contenedor separado
+2. Los datos de PostgreSQL persisten en un volumen Docker
+3. La aplicación se reconstruye automáticamente cuando hay cambios
+4. Las variables de entorno se cargan desde el archivo `.env`

@@ -41,4 +41,4 @@ class OpenAiService{
     };
 };
 
-export default new OpenAiService;
+export default new OpenAiService();

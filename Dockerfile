@@ -8,11 +8,9 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
 
-# Copiar los archivos de Prisma
+# Copiar los archivos de Prisma y generar el cliente
 COPY prisma ./prisma/
-# Generar el cliente de Prisma
 RUN npx prisma generate
-RUN npx prisma db seed
 
 # Copiar el resto del código fuente
 COPY . .
@@ -23,5 +21,16 @@ RUN npm run build
 # Exponer el puerto
 EXPOSE 3000
 
-# Ejecutar migraciones antes de iniciar la aplicación
-CMD ["sh", "-c", "npx prisma migrate deploy && npm start"]
+# Crear script de inicio
+RUN echo '#!/bin/sh\n\
+echo "Waiting for database..."\n\
+sleep 5\n\
+echo "Running migrations..."\n\
+npx prisma migrate deploy\n\
+echo "Running seed..."\n\
+npx prisma db seed\n\
+echo "Starting application..."\n\
+npm start' > /docker-entrypoint.sh && chmod +x /docker-entrypoint.sh
+
+# Ejecutar el script de inicio
+CMD ["/docker-entrypoint.sh"]

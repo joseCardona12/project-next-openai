@@ -1,79 +1,63 @@
 import { NextResponse } from "next/server";
-import { prisma } from '@/lib/prisma'
-import jwt, { JwtPayload } from 'jsonwebtoken'
+import  {prisma}  from '@/lib/prisma'
+import jwt,{ JwtPayload } from 'jsonwebtoken'
 
-export async function POST(request: Request) {
+export async function POST(request: Request)  {
     try {
         const body = await request.json();
         const authorization = request.headers.get('Authorization');
-
-        if (!authorization) {
+    
+        if(!authorization){
             return NextResponse.json(
-                { error: 'Authorization header is required' },
-                { status: 401 }
+                {error: 'Not authorizesd'},
+                {status: 401}
             )
         }
-
+        
         const token = authorization.split(' ')[1];
-
+    
         if (!process.env.JWT_KEY) {
             throw new Error('JWT_KEY is not defined in the environment variables');
         }
-
-        try {
-            const decoded = jwt.verify(token, process.env.JWT_KEY) as JwtPayload;
-
-            if (!body.description || !body.prompt_id) {
+    
+        try{
+            jwt.verify(token, process.env.JWT_KEY) as JwtPayload;
+    
+            if(!body.description){
                 return NextResponse.json(
-                    { error: "Description and prompt_id are required" },
+                    {error: "Description and prompt is are required"},
                     { status: 400 }
                 )
             }
-
-            // Verificar que el prompt existe
-            const existingPrompt = await prisma.prompt.findUnique({
-                where: {
-                    id: body.prompt_id
-                }
-            });
-
-            if (!existingPrompt) {
-                return NextResponse.json(
-                    { error: "Prompt not found" },
-                    { status: 404 }
-                )
-            }
-
-            const answer = await prisma.answer.create({
+    
+    
+            const prompt = await prisma.answer.create({
                 data: {
                     description: body.description,
                     prompt_id: body.prompt_id
-                },
-                include: {
-                    prompts: true
                 }
             })
-
+    
             return NextResponse.json(
                 {
                     message: 'Answer successfully saved',
-                    data: answer,
+                    prompt: prompt,
                 },
                 { status: 201 }
             );
-
-        } catch (error) {
-            if (error instanceof jwt.JsonWebTokenError) {
+    
+        } catch(error){
+            if(error instanceof Error){
                 return NextResponse.json({ error: 'Invalid token' }, { status: 403 });
             }
-            throw error;
         }
     }
-    catch (error) {
-        console.error('Error in answer route:', error);
-        return NextResponse.json(
-            { error: 'Internal server error' },
-            { status: 500 }
-        )
+    catch(error){
+        if(error instanceof Error){
+            return NextResponse.json(
+                {message: error.message},
+                {status: 500}
+            )
+        }
     }
 }
