@@ -1,7 +1,40 @@
-import React from 'react';
+"use client"
+import React, { useState } from 'react';
+import { registerUser } from '@/app/infrastructure/services/authService';
 import styles from './RegisterForm.module.scss';
 
 const RegisterForm: React.FC = () => {
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    try {
+      
+      const newUser = await registerUser(name, email, password);
+      console.log('Registro exitoso:', newUser);
+
+     
+      window.location.href = '/dashboard';
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Ocurrió un error desconocido');
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.card}>
@@ -11,9 +44,18 @@ const RegisterForm: React.FC = () => {
           </h2>
           <h1>REGISTER</h1>
         </div>
-        <form>
+        <form onSubmit={handleRegister}>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          
           <div className={styles.inputGroup}>
-            <input type="text" id="name" placeholder="Name" />
+            <input
+              type="text"
+              id="name"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
             <span className={styles.icon}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -31,8 +73,16 @@ const RegisterForm: React.FC = () => {
               </svg>
             </span>
           </div>
+
           <div className={styles.inputGroup}>
-            <input type="email" id="email" placeholder="Email" />
+            <input
+              type="email"
+              id="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
             <span className={styles.icon}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -50,8 +100,16 @@ const RegisterForm: React.FC = () => {
               </svg>
             </span>
           </div>
+
           <div className={styles.inputGroup}>
-            <input type="password" id="password" placeholder="Password" />
+            <input
+              type="password"
+              id="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
             <span className={styles.icon}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -69,8 +127,9 @@ const RegisterForm: React.FC = () => {
               </svg>
             </span>
           </div>
-          <button type="submit" className={styles.button}>
-            REGISTER
+
+          <button type="submit" className={styles.button} disabled={loading}>
+            {loading ? 'Cargando...' : 'REGISTER'}
           </button>
         </form>
         <div className={styles.footer}>

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { useUserStore } from '../../../app/core/application/global-state/store';
-import styles from './Steps.module.scss';
-import Image from 'next/image';
+import React, { useState } from "react";
+import { useUserStore } from "@/app/core/application/global-state/store";
+import styles from "./Steps.module.scss";
+import Image from "next/image";
+import { useContextState } from "@/app/core/application/global-state";
 
 interface StepProps {
   onNext: () => void;
@@ -10,6 +11,7 @@ interface StepProps {
 const StepOne: React.FC<StepProps> = ({ onNext }) => {
   const { addResponse } = useUserStore();
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const { contextState, setContextState } = useContextState((state) => state);
 
   const handleSelect = (response: string) => {
     setSelectedOption(response);
@@ -17,7 +19,9 @@ const StepOne: React.FC<StepProps> = ({ onNext }) => {
 
   const handleContinue = () => {
     if (selectedOption) {
+      console.log("select", selectedOption);
       addResponse(selectedOption);
+      setContextState([...contextState, selectedOption]);
       onNext();
     }
   };
@@ -25,54 +29,53 @@ const StepOne: React.FC<StepProps> = ({ onNext }) => {
   return (
     <div className={styles.stepContainer}>
       <div className={styles.header}>
-      <Image
+        <Image
           src="/img/joseui.png"
           alt="Jose Iu Smart"
           className={styles.icon}
           width={150} // Ajusta el ancho
           height={150} // Ajusta el alto
         />
-    
 
         <h2 className={styles.title}>What is the goal of your training?</h2>
       </div>
       <div className={styles.optionsGrid}>
         <button
-          onClick={() => handleSelect('Lose Weight')}
+          onClick={() => handleSelect("Lose Weight")}
           className={`${styles.optionButton} ${
-            selectedOption === 'Lose Weight' ? styles.selected : ''
+            selectedOption === "Lose Weight" ? styles.selected : ""
           }`}
         >
           <span>Lose Weight</span>
         </button>
         <button
-          onClick={() => handleSelect('Gain Muscle')}
+          onClick={() => handleSelect("Gain Muscle")}
           className={`${styles.optionButton} ${
-            selectedOption === 'Gain Muscle' ? styles.selected : ''
+            selectedOption === "Gain Muscle" ? styles.selected : ""
           }`}
         >
           <span>Gain Muscle</span>
         </button>
         <button
-          onClick={() => handleSelect('Improve Endurance')}
+          onClick={() => handleSelect("Improve Endurance")}
           className={`${styles.optionButton} ${
-            selectedOption === 'Improve Endurance' ? styles.selected : ''
+            selectedOption === "Improve Endurance" ? styles.selected : ""
           }`}
         >
           <span>Improve Endurance</span>
         </button>
         <button
-          onClick={() => handleSelect('Flexibility')}
+          onClick={() => handleSelect("Flexibility")}
           className={`${styles.optionButton} ${
-            selectedOption === 'Flexibility' ? styles.selected : ''
+            selectedOption === "Flexibility" ? styles.selected : ""
           }`}
         >
           <span>Flexibility</span>
         </button>
         <button
-          onClick={() => handleSelect('Physical Recovery')}
+          onClick={() => handleSelect("Physical Recovery")}
           className={`${styles.optionButton} ${
-            selectedOption === 'Physical Recovery' ? styles.selected : ''
+            selectedOption === "Physical Recovery" ? styles.selected : ""
           }`}
         >
           <span>Physical Recovery</span>
@@ -82,7 +85,7 @@ const StepOne: React.FC<StepProps> = ({ onNext }) => {
         onClick={handleContinue}
         disabled={!selectedOption}
         className={`${styles.continueButton} ${
-          !selectedOption ? styles.disabled : ''
+          !selectedOption ? styles.disabled : ""
         }`}
       >
         Continue

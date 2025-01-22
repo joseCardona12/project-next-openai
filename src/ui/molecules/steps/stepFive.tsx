@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import { useUserStore } from '../../../app/core/application/global-state/store';
-import styles from './Steps.module.scss';
-import Image from 'next/image';
+import React, { useState } from "react";
+import { useUserStore } from "@/app/core/application/global-state/store";
+import styles from "./Steps.module.scss";
+import Image from "next/image";
+import { useContextState } from "@/app/core/application/global-state";
+import { useRouter } from "next/navigation";
 
 interface StepProps {
   onNext: () => void;
@@ -10,6 +12,8 @@ interface StepProps {
 const StepFive: React.FC<StepProps> = ({ onNext }) => {
   const { addResponse } = useUserStore();
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const { contextState, setContextState } = useContextState((state) => state);
+  const router = useRouter();
 
   const handleSelect = (response: string) => {
     setSelectedOption(response);
@@ -18,53 +22,57 @@ const StepFive: React.FC<StepProps> = ({ onNext }) => {
   const handleContinue = () => {
     if (selectedOption) {
       addResponse(selectedOption);
+      setContextState([...contextState, selectedOption]);
       onNext();
+      router.push("/context");
+      localStorage.setItem("user-context", JSON.stringify(contextState));
     }
   };
 
   return (
     <div className={styles.stepContainer}>
       <div className={styles.header}>
-      <Image
+        <Image
           src="/img/joseui.png"
           alt="Jose Iu Smart"
           className={styles.icon}
           width={150} // Ajusta el ancho
           height={150} // Ajusta el alto
         />
-    
 
-        <h2 className={styles.title}>how much time can you dedicate to each session?</h2>
+        <h2 className={styles.title}>
+          how much time can you dedicate to each session?
+        </h2>
       </div>
       <div className={styles.optionsGrid}>
         <button
-          onClick={() => handleSelect('Lose Weight')}
+          onClick={() => handleSelect("15 min")}
           className={`${styles.optionButton} ${
-            selectedOption === 'Lose Weight' ? styles.selected : ''
+            selectedOption === "15 min" ? styles.selected : ""
           }`}
         >
           <span>15 min</span>
         </button>
         <button
-          onClick={() => handleSelect('Gain Muscle')}
+          onClick={() => handleSelect("30 min")}
           className={`${styles.optionButton} ${
-            selectedOption === 'Gain Muscle' ? styles.selected : ''
+            selectedOption === "30 min" ? styles.selected : ""
           }`}
         >
           <span>30 min</span>
         </button>
         <button
-          onClick={() => handleSelect('Improve Endurance')}
+          onClick={() => handleSelect("1 hour")}
           className={`${styles.optionButton} ${
-            selectedOption === 'Improve Endurance' ? styles.selected : ''
+            selectedOption === "1 hour" ? styles.selected : ""
           }`}
         >
           <span>1 hour</span>
         </button>
         <button
-          onClick={() => handleSelect('Flexibility')}
+          onClick={() => handleSelect("2 hours")}
           className={`${styles.optionButton} ${
-            selectedOption === 'Flexibility' ? styles.selected : ''
+            selectedOption === "2 hours" ? styles.selected : ""
           }`}
         >
           <span>2 hours</span>
@@ -74,10 +82,10 @@ const StepFive: React.FC<StepProps> = ({ onNext }) => {
         onClick={handleContinue}
         disabled={!selectedOption}
         className={`${styles.continueButton} ${
-          !selectedOption ? styles.disabled : ''
+          !selectedOption ? styles.disabled : ""
         }`}
       >
-        <a href="/context">Continue</a>
+        Continue
       </button>
     </div>
   );
