@@ -2,7 +2,6 @@ import { POST } from '@/app/api/auth/login/route';
 import { prisma } from '@/lib/prisma';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { NextResponse } from 'next/server';
 
 jest.mock('@/lib/prisma', () => ({
   prisma: {
