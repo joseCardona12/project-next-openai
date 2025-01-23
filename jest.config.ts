@@ -21,6 +21,7 @@ const config: Config = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1', // Mapea el alias `@/` a la carpeta `src/` de tu proyecto
   },
+  setupFiles: ['./jest.setup.js'],
 };
 
 export default config;
