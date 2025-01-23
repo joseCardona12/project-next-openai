@@ -4,13 +4,17 @@ import styles from './LoginForm.module.scss';
 import { AuthService } from '@/app/infrastructure/services';
 import { ILoginResponseError, ILoginResponseSuccess } from '@/app/core/application/dto';
 import { useUserState } from '@/app/core/application/global-state';
+import { inputAlert } from '@/ui/molecules';
+import { useRouter } from 'next/navigation';
+import { UtilApplication } from '@/app/core/application/utils';
 
-const LoginForm: React.FC = () => {
+const   LoginForm: React.FC = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
   const {setUser} = useUserState((state)=>state);
 
 
@@ -20,16 +24,21 @@ const LoginForm: React.FC = () => {
     setError('');
 
     const userLogged :ILoginResponseError | ILoginResponseSuccess  = await AuthService.login({email, password});
-    if("error" in userLogged){
-      setError(userLogged.error);
+    console.log("userLogged",userLogged);
+    if("code" in userLogged){
+      inputAlert(userLogged.message,"error");
+      setLoading(false);
       return;
     }
-    const {message,token,user} = userLogged;
-    console.log("message",message);
+    const {token,user} = userLogged as ILoginResponseSuccess;
+    inputAlert(`${user.name}, Successfully logged`,"success");
     setUser({
       token,
       user
     });
+    setLoading(false);
+    UtilApplication.guardApp();
+    router.push("/dashboard");
   };
 
   return (

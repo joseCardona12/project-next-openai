@@ -1,5 +1,5 @@
 
 export interface ILoginResponseError{
-    error:string,
-    status:number
+    message:string,
+    code:number,
 }

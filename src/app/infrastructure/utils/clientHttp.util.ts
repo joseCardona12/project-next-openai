@@ -18,16 +18,13 @@ export class ClientHttpUtil implements ClientHttpPort {
   };
 
   private async managementError<T>(response: Response): Promise<T> {
-    try {
-      const errorData = await response.json();
-      console.log("Error utils", errorData);  
-      if (!response.ok)
-        throw new Error(errorData.message || "Opps. There is an Error");
-      return errorData as T;
-    } catch (error) {
-      console.error('HTTP Client error:', error);
-      throw error;
-    }
+      if (!response.ok) {
+        return ({
+          message: "Opps. There is an Error with response",
+          code: response.status
+        }) as T;
+      }
+      return await response.json();
   };
 
   public fetchApi = async <B>(
@@ -36,24 +33,19 @@ export class ClientHttpUtil implements ClientHttpPort {
     method: string,
     bodyClient?: B
   ): Promise<Response> => {
-    try {
-      console.log('Making request to:', `${this.baseUrl}/${path}`);
-      console.log('Request headers:', headers);
-      console.log('Request method:', method);
-      console.log('Request body:', bodyClient);
+    console.log('Making request to:', `${this.baseUrl}/${path}`);
+    console.log('Request headers:', headers);
+    console.log('Request method:', method);
+    console.log('Request body:', bodyClient);
 
-      const response = await fetch(`${this.baseUrl}/${path}`, {
-        headers,
-        method,
-        body: bodyClient ? JSON.stringify(bodyClient) : undefined,
-        cache: "no-store",
-      });
-
-      return response;
-    } catch (error) {
-      console.error('HTTP Client error:', error);
-      throw error;
-    }
+    const response = await fetch(`${this.baseUrl}/${path}`, {
+      headers,
+      method,
+      body: bodyClient ? JSON.stringify(bodyClient) : undefined,
+      cache: "no-store",
+    });
+    console.log('Response:', response);
+    return response;
   };
 
   public async get<T>(path: string): Promise<T> {

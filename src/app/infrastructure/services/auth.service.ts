@@ -9,7 +9,7 @@ class AuthService implements AuthPort{
         this.clientHttpUtil = new ClientHttpUtil();
     };
     public async login(data: ILoginRequest): Promise<ILoginResponseError | ILoginResponseSuccess> {
-        const response = this.clientHttpUtil.post<ILoginResponseError | ILoginResponseSuccess,ILoginRequest >("auth/login", data);
+        const response = await this.clientHttpUtil.post<ILoginResponseError | ILoginResponseSuccess,ILoginRequest >("auth/login", data);
         console.log("response", response);
         return response;    
     };
