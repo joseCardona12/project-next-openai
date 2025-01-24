@@ -30,7 +30,6 @@ export async function POST(request: Request)  {
                 )
             }
     
-    
             const answer = await prisma.answer.create({
                 data: {
                     description: body.description,
