@@ -26,6 +26,7 @@ const StepFive: React.FC<StepProps> = ({ onNext }) => {
       onNext();
       router.push("/context");
       localStorage.setItem("user-context", JSON.stringify(contextState));
+      
     }
   };
 
