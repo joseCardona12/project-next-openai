@@ -1,14 +1,21 @@
 "use client"
 import React, { useState } from 'react';
-import { loginUser } from '@/app/infrastructure/services/authService';
 import styles from './LoginForm.module.scss';
+import { AuthService } from '@/app/infrastructure/services';
+import { ILoginResponseError, ILoginResponseSuccess } from '@/app/core/application/dto';
+import { useUserState } from '@/app/core/application/global-state';
+import { inputAlert } from '@/ui/molecules';
+import { useRouter } from 'next/navigation';
+import { UtilApplication } from '@/app/core/application/utils';
 
-const LoginForm: React.FC = () => {
+const   LoginForm: React.FC = () => {
 
-  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const {setUser} = useUserState((state)=>state);
 
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -16,22 +23,21 @@ const LoginForm: React.FC = () => {
     setLoading(true);
     setError('');
 
-    try {
-      
-      const user = await loginUser(name, password);
-      console.log('Login exitoso:', user);
-
-     
-      window.location.href = '/home';
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message); 
-      } else {
-        setError('Ocurrió un error desconocido');
-      }
-    } finally {
+    const userLogged :ILoginResponseError | ILoginResponseSuccess  = await AuthService.login({email, password});
+    console.log("userLogged",userLogged);
+    if("code" in userLogged){
+      inputAlert(userLogged.message,"error");
       setLoading(false);
+      return;
     }
+    const {token,user} = userLogged as ILoginResponseSuccess;
+    inputAlert(`${user.name}, Successfully logged`,"success");
+    setUser({
+      token,
+      user
+    });
+    setLoading(false);
+    router.push('/dashboard');
   };
 
   return (
@@ -51,8 +57,8 @@ const LoginForm: React.FC = () => {
               type="text"
               id="name"
               placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
             <span className={styles.icon}>

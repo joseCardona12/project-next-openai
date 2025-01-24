@@ -8,6 +8,7 @@ import type { IGender } from "./gender.interface";
 import type { IPrompt } from "./prompt.interface";
 import type { IContext } from "./context.interface";
 import type { ITarget } from "./target.interface";
+import type { IExercise } from "./exercise.interface";
 
 export {
     IAgeRange,
@@ -18,4 +19,5 @@ export {
     IPrompt,
     IContext,
     ITarget,
+    IExercise
 }

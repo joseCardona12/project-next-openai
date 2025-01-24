@@ -1,38 +1,44 @@
 "use client"
 import React, { useState } from 'react';
-import { registerUser } from '@/app/infrastructure/services/authService';
 import styles from './RegisterForm.module.scss';
+import { AuthService } from '@/app/infrastructure/services';
+import { useRouter } from 'next/navigation';
+import { IRegisterRequest } from '@/app/core/application/dto';
+import { inputAlert } from '@/ui/molecules';
 
+interface IRegisterForm {
+  name:string,
+  email:string,
+  password:string,
+}
 const RegisterForm: React.FC = () => {
-
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [registerData, setRegisterData] = useState<IRegisterForm>({
+    name:'',
+    email:'',
+    password:''
+  });
+  const router = useRouter();
 
-
-  const handleRegister = async (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent):Promise<void> => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
-    try {
-      
-      const newUser = await registerUser(name, email, password);
-      console.log('Registro exitoso:', newUser);
-
-     
-      window.location.href = '/dashboard';
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError('Ocurrió un error desconocido');
-      }
-    } finally {
+    const userRegistered = await AuthService.register({
+      ...registerData,
+      gender_id: 1,
+    });
+    console.log(userRegistered);
+    if("code" in userRegistered){
+      inputAlert("User exists!","error");
       setLoading(false);
+      return;
     }
+    inputAlert("Created user successfully","success");
+    router.push('/login');
+    setLoading(false);
   };
 
   return (
@@ -52,8 +58,8 @@ const RegisterForm: React.FC = () => {
               type="text"
               id="name"
               placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={registerData.name}
+              onChange={(e) => setRegisterData({ ...registerData, name: e.target.value })}
               required
             />
             <span className={styles.icon}>
@@ -79,8 +85,8 @@ const RegisterForm: React.FC = () => {
               type="email"
               id="email"
               placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={registerData.email}
+              onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
               required
             />
             <span className={styles.icon}>
@@ -106,8 +112,8 @@ const RegisterForm: React.FC = () => {
               type="password"
               id="password"
               placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={registerData.password}
+              onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
               required
             />
             <span className={styles.icon}>

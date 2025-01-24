@@ -8,7 +8,7 @@ export interface ClientHttpPort{
      * @param bodyClient Body the request
      * This method return the completed response or throw new Error
      */
-    fetchApi<B>(path:string,headers:Record<string,string>, method:string,bodyClient?:B):Promise<Response>,
+    fetchApi<B>(path:string,headers:Record<string,string>, method:string,bodyClient?:B):Promise<Response | {message:string}>,
 
     /**
      * 

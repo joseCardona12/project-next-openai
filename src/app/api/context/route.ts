@@ -10,7 +10,7 @@ export async function POST(request: Request) {
 
         if(!authorization){
             return NextResponse.json(
-                {error: 'Not authorizesd'},
+                {error: 'Not authorized'},
                 {status: 401}
             )
         }
@@ -71,7 +71,7 @@ export async function GET(request:Request){
 
         if(!authorization){
             return NextResponse.json(
-                {error: 'Not authorizesd'},
+                {error: 'Not authorized'},
                 {status: 401}
             )
         }

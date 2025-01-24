@@ -11,8 +11,8 @@ class OpenAiService {
     });
   }
 
-  public async createPrompt(prompt: string): Promise<string>{
-    if (!this.openai) return "openAi";
+  public async createPrompt(prompt: string): Promise<{message:string,reply:string}>{
+    if (!this.openai) return {message:"openAi",reply:""};
     try {
       const response = await this.openai.chat.completions.create({
         model: "gpt-4o-mini",
@@ -29,15 +29,15 @@ class OpenAiService {
       const reply = response.choices[0]?.message?.content || "Sin respuesta";
 
       /// Call endpoint for prompt and answer
-      return NextResponse.json({
+      return ({
         message: "Successfully",
         reply,
       });
     } catch (error: unknown) {
       console.log("Error to get chats");
-      return NextResponse.json({
-        message: "Error to get chats",
-        status: 500,
+      return ({
+        message: "chats",
+        reply: "500",
       });
     }
   }

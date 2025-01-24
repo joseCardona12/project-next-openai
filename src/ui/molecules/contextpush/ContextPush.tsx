@@ -1,7 +1,17 @@
-import styles from "./StepOne.module.scss";
+"use client";
+import { useEffect } from "react";
+import styles from "../steps/Steps.module.scss";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 
 const ContextPush: React.FC = () => {
+  const router = useRouter();
+
+  useEffect(()=>{
+    router.push("/home");
+  }, [])
   return (
     <div className={styles.contextpush}>
       <div className={styles.header}>
@@ -19,10 +29,11 @@ const ContextPush: React.FC = () => {
         />
       </div>
       <button className={styles.continueButton}>
-        <p>
-          <a href="/exercises">Continue</a>
-        </p>
-      </button>
+          <p>
+            <Link href="/exercises">Continue</Link>
+          </p>
+      </button>;
+
     </div>
   );
 };

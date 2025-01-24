@@ -71,7 +71,7 @@ model Context{
 
 model Prompt {
   id            Int          @id @default(autoincrement())
-  desciption    String
+  description   String
   user_id       Int
   users          User        @relation(fields: [user_id], references: [id]) 
   answers        Answer[]
@@ -79,7 +79,7 @@ model Prompt {
 
 model Answer {
   id            Int          @id @default(autoincrement())
-  desciption    String
+  description    String
   prompt_id     Int
   prompts        Prompt      @relation(fields: [prompt_id], references: [id]) 
 }
