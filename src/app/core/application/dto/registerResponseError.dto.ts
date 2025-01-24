@@ -1,10 +1,9 @@
 
+
+export interface IRegisterResponseErrorMessage{
+    message:string,
+    status:number,
+}
 export interface IRegisterResponseError{
     error:string,
-    status:number
-}
-
-export interface IRegisterResponseErrorCatch{
-    message:string,
-    status:number
 }

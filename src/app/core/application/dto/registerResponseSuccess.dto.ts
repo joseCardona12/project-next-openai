@@ -1,10 +1,5 @@
 
 export interface IRegisterResponseSuccess{
-    response:IRegisterResponse,
-    status:number,
-}
-
-export interface IRegisterResponse{
     message:string,
     user:IPostedUser
 }
