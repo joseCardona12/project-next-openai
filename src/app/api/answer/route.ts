@@ -30,8 +30,7 @@ export async function POST(request: Request)  {
                 )
             }
     
-    
-            const prompt = await prisma.answer.create({
+            const answer = await prisma.answer.create({
                 data: {
                     description: body.description,
                     prompt_id: body.prompt_id
@@ -41,7 +40,7 @@ export async function POST(request: Request)  {
             return NextResponse.json(
                 {
                     message: 'Answer successfully saved',
-                    prompt: prompt,
+                    answer: answer,
                 },
                 { status: 201 }
             );

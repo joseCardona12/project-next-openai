@@ -9,9 +9,12 @@ import type { IUserResponse } from "./userResponse.dto";
 import type { IUserResponseError } from "./userResponseError.dto";
 import type { IOpenAiResponseReply, IOpenAiResponseStatus } from "./openAiResponse.dto";
 import type { IOpenAiRequest } from "./openAIRequest.dto";
+import type { IPromptResponseSuccess, IPrompt } from "./promptResponse.dto";
+import type { IPromptResponseError } from "./promptResponseError.dto";
+import type { IAnswerRequest } from "./answerRequest.dto";
 
 export {
-    ILoginRequest, 
+    ILoginRequest,  
     ILoginResponseError,
     ILoginResponseSuccess,
     IRegisterRequest,
@@ -24,4 +27,8 @@ export {
     IOpenAiResponseReply,
     IOpenAiResponseStatus,
     IOpenAiRequest,
+    IPromptResponseSuccess,
+    IPrompt,
+    IPromptResponseError,
+    IAnswerRequest,
 }
