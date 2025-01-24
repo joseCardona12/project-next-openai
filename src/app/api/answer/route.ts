@@ -9,7 +9,7 @@ export async function POST(request: Request)  {
     
         if(!authorization){
             return NextResponse.json(
-                {error: 'Not authorizesd'},
+                {error: 'Not authorized'},
                 {status: 401}
             )
         }
@@ -25,7 +25,7 @@ export async function POST(request: Request)  {
     
             if(!body.description){
                 return NextResponse.json(
-                    {error: "Description and prompt is are required"},
+                    {error: "Description and prompt_id are required"},
                     { status: 400 }
                 )
             }

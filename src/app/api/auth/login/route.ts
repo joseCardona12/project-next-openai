@@ -22,7 +22,7 @@ export async function POST(request: Request) {
         });
         console.log('User found:', user ? 'Yes' : 'No'); // Log si se encontró el usuario
 
-        if (!user) {
+        if(!user){
             return NextResponse.json(
                 { error: "Invalid credentials" },
                 { status: 401 }
