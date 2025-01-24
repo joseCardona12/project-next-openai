@@ -9,7 +9,7 @@ export async function POST(request: Request)  {
     
         if(!authorization){
             return NextResponse.json(
-                {error: 'Not authorizesd'},
+                {error: 'Not authorized'},
                 {status: 401}
             )
         }
@@ -25,13 +25,13 @@ export async function POST(request: Request)  {
     
             if(!body.description){
                 return NextResponse.json(
-                    {error: "Description and prompt is are required"},
+                    {error: "Description and prompt_id are required"},
                     { status: 400 }
                 )
             }
     
     
-            const prompt = await prisma.answer.create({
+            const answer = await prisma.answer.create({
                 data: {
                     description: body.description,
                     prompt_id: body.prompt_id
@@ -41,7 +41,7 @@ export async function POST(request: Request)  {
             return NextResponse.json(
                 {
                     message: 'Answer successfully saved',
-                    prompt: prompt,
+                    answer: answer,
                 },
                 { status: 201 }
             );

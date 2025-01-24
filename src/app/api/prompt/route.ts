@@ -9,7 +9,7 @@ export async function POST(request: Request)  {
     
         if(!authorization){
             return NextResponse.json(
-                {error: 'Not authorizesd'},
+                {error: 'Not authorized'},
                 {status: 401}
             )
         }

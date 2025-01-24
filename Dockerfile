@@ -12,7 +12,7 @@ RUN npm install
 COPY prisma ./prisma/
 # Generar el cliente de Prisma
 RUN npx prisma generate
-RUN npx prisma db seed
+# RUN npx prisma db seed
 
 # Copiar el resto del código fuente
 COPY . .

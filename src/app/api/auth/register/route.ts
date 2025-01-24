@@ -37,6 +37,7 @@ export async function POST(request:Request) {
         })
     
         const postedUser = {
+            id: data.id,
             name: data.name,
             email: data.email,
             gender_id: data.gender_id
