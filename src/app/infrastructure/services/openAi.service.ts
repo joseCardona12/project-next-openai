@@ -1,44 +1,18 @@
-import { openAi_api_key } from "@/app/core/application/config/loadEnv"; 
-import {OpenAI} from "openai";
+import { IOpenAiRequest, IOpenAiResponseReply, IOpenAiResponseStatus } from "@/app/core/application/dto";
+import { ClientHttpUtil } from "../utils"
 
-class OpenAiService{
-    private baseUrl:string = "https://api.openai.com/v1/completions";
-    private openAi:OpenAI;
+class OpenAiService {
+    private clientHttpUtil: ClientHttpUtil;
 
-    constructor(baseUrlClient?:string){
-        this.baseUrl = baseUrlClient || this.baseUrl;
-        this.openAi = new OpenAI({
-            apiKey: openAi_api_key
+    constructor(){
+        this.clientHttpUtil = new ClientHttpUtil();
+    };
+
+    public async createPromptAPi(prompt:string, token:string):Promise<IOpenAiResponseStatus | IOpenAiResponseReply>{
+        return await this.clientHttpUtil.post<IOpenAiResponseStatus | IOpenAiResponseReply, IOpenAiRequest>("openAi", {prompt}, {
+            Authorization: `Bearer ${token}`
         });
-    };
-
-    private getHeaders = (): {message:string} | Record<string,string> =>{
-        if(openAi_api_key) return ({
-            message: "Error. The environment variable not exists!"
-        });
-        return {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${openAi_api_key}`
-        };
-    };
-
-    public async createPrompt(prompt:string){
-        try{
-            const response = await this.openAi.chat.completions.create({
-                model: "gpt-4",
-                messages: [
-                    {role: "system", content: ""},
-                    {role: "user", content: prompt}
-                ]
-            });
-            console.log("openAi response", response.choices[0].message.content);
-
-        }catch(error:unknown){
-            console.error({
-                message:`Error to call api openAi. ERROR: ${error}`
-            });
-        };
-    };
-};
+    }
+}
 
 export default new OpenAiService();

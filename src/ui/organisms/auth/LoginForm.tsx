@@ -37,6 +37,7 @@ const   LoginForm: React.FC = () => {
       user
     });
     setLoading(false);
+    router.push('/dashboard');
   };
 
   return (

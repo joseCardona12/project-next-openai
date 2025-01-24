@@ -37,7 +37,7 @@ const RegisterForm: React.FC = () => {
       return;
     }
     inputAlert("Created user successfully","success");
-    router.push('/dashboard');
+    router.push('/login');
     setLoading(false);
   };
 

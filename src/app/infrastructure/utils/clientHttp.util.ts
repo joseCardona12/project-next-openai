@@ -11,9 +11,10 @@ export class ClientHttpUtil implements ClientHttpPort {
     this.baseUrl = `${this.protocol}://${this.host}/api`;
   };
 
-  private getHeaders(): Record<string, string> {
+  private getHeaders(headers: Record<string, string> = {}): Record<string, string> {
     return {
       "Content-Type": "application/json",
+      ...headers
     };
   };
 
@@ -54,8 +55,9 @@ export class ClientHttpUtil implements ClientHttpPort {
     return await this.managementError(response);
   };
 
-  public async post<T, B>(path: string, body: B): Promise<T> {
-    const headers: Record<string, string> = this.getHeaders();
+  public async post<T, B>(path: string, body: B, headersClient?: Record<string, string>): Promise<T> {
+    const headers: Record<string, string> = this.getHeaders(headersClient);
+    console.log(headers);
     const response = await this.fetchApi(path, headers, "POST", body);
     return await this.managementError(response);
   };

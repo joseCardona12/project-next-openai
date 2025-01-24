@@ -7,6 +7,8 @@ import type { IRegisterResponseError, IRegisterResponseErrorMessage } from "./re
 import type { IPostedUser, IRegisterResponseSuccess} from "./registerResponseSuccess.dto";
 import type { IUserResponse } from "./userResponse.dto";
 import type { IUserResponseError } from "./userResponseError.dto";
+import type { IOpenAiResponseReply, IOpenAiResponseStatus } from "./openAiResponse.dto";
+import type { IOpenAiRequest } from "./openAIRequest.dto";
 
 export {
     ILoginRequest, 
@@ -19,4 +21,7 @@ export {
     IRegisterResponseSuccess,
     IUserResponse,
     IUserResponseError,
+    IOpenAiResponseReply,
+    IOpenAiResponseStatus,
+    IOpenAiRequest,
 }
