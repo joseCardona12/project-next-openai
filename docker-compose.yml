@@ -1,5 +1,5 @@
 # Use Docker Compose version 3.9 (latest stable version at the time of writing)
-version: '3.9'
+# version: '3.9'
 
 # Define the services (containers) that make up your application
 services:
