@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import styles from './RegisterForm.module.scss';
 import { AuthService } from '@/app/infrastructure/services';
 import { useRouter } from 'next/navigation';
-import { IRegisterRequest } from '@/app/core/application/dto';
 import { inputAlert } from '@/ui/molecules';
 
 interface IRegisterForm {

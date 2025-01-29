@@ -9,12 +9,12 @@ import { IExercise } from "@/app/core/application/interfaces";
 
 const Home: React.FC = () => {
   const { contextState } = useContextState((state) => state);
-  const { openAiResponse, setOpenAiResponse } = useOpenAiState((state) => state);
+  const { setOpenAiResponse } = useOpenAiState((state) => state);
   const [target, current_level, age_range, day_week] = contextState;
   const { user } = useUserState((state) => state);
 
   const [exercises, setExercises] = useState<IExercise[]>([]);
-  const [loading, setLoading] = useState<boolean>(true); // Estado para mostrar el mensaje de carga
+  const [loading, setLoading] = useState<boolean>(true); 
 
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState<number>(0);
 
@@ -41,24 +41,24 @@ const Home: React.FC = () => {
         // Llama al servicio de OpenAI
         const dataOpenAi: IOpenAiResponseStatus | IOpenAiResponseReply =
           await OpenAiService.createPromptAPi(prompt, user?.token || "");
-
+  
         // Actualiza el estado con la respuesta
         const dataReply = dataOpenAi as IOpenAiResponseReply;
         setOpenAiResponse(dataReply);
-
+  
         // Limpia y parsea el JSON
         let cleanReply = dataReply.reply.trim(); // Elimina espacios en blanco al inicio y final
         if (cleanReply.startsWith("```json")) {
           cleanReply = cleanReply.replace(/```json/g, "").replace(/```/g, ""); // Elimina bloques de Markdown
         }
-
+  
         const exerciseJson: IExercise[] = JSON.parse(cleanReply); // Parsea el JSON limpio
         setExercises(exerciseJson);
-
+  
         // Llama al servicio de prompts
         const dataPrompt: IPromptResponseError | IPromptResponseSuccess =
           await PromptService.postPrompt(prompt, user?.token || "");
-
+  
         const promptSuccess = dataPrompt as IPromptResponseSuccess;
         await AnswerService.createAnswer(dataReply.reply, user?.token || "", promptSuccess.prompt.id);
       } catch (error) {
@@ -67,9 +67,10 @@ const Home: React.FC = () => {
         setLoading(false); // Finaliza la carga
       }
     };
-
+  
     promptApi();
-  }, []);
+  }, [age_range, current_level, day_week, setOpenAiResponse, target, user?.token]); // Add the dependencies here
+  
 
   console.log(exercises);
 

@@ -136,21 +136,21 @@ describe("GET /api/context", () => {
     });
   
     it("should return 403 if the token is invalid", async () => {
-      const invalidToken = "invalid_token"; 
-      try {
-        jwt.verify(invalidToken, process.env.JWT_KEY!); 
-      } catch (err) {
-        const request = mockRequest(invalidToken);
-  
-        const response = await GET(request);
-
-        if(!response) return
-        const body = await response.json();
-  
-        expect(response.status).toBe(403);
-        expect(body.error).toBe("Invalid token");
-      }
+      // Mock the jwt.verify function to throw an error when called
+      (jwt.verify as jest.Mock).mockImplementation(() => {
+        throw new Error("Invalid token");
+      });
+    
+      const request = mockRequest("invalid_token");
+      const response = await GET(request);
+    
+      if (!response) return;
+      const body = await response.json();
+    
+      expect(response.status).toBe(403);
+      expect(body.error).toBe("Invalid token");
     });
+    
   
     it("should return 500 if JWT_KEY is not defined", async () => {
       process.env.JWT_KEY = "";  
