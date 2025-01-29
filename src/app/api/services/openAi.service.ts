@@ -19,7 +19,7 @@ class OpenAiService {
           {
             role: "system",
             content:
-              "Eres un experto en ejercicios y Smart Fit. Solo responde preguntas relacionadas con estos temas.",
+              "Eres un experto en ejercicios y Smart ui. Solo responde preguntas relacionadas con estos temas.",
           },
           { role: "user", content: prompt },
         ],
