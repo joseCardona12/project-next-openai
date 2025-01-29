@@ -1,4 +1,4 @@
-import { ILoginRequest, ILoginResponseError, ILoginResponseSuccess, IRegisterRequest, IRegisterResponseError, IRegisterResponseErrorMessage, IRegisterResponseSuccess, IUserResponse, IUserResponseError } from "@/app/core/application/dto";
+import { ILoginRequest, ILoginResponseError, ILoginResponseSuccess, IRegisterRequest, IRegisterResponseError, IRegisterResponseErrorMessage, IRegisterResponseSuccess} from "@/app/core/application/dto";
 import { IUser } from "@/app/core/application/interfaces/user.interface";
 import { AuthPort } from "@/app/core/application/ports";
 import { ClientHttpUtil } from "@/app/infrastructure/utils/clientHttp.util";

@@ -1,5 +1,4 @@
 import { openAi_api_key } from "@/app/core/application/config/loadEnv";
-import { NextResponse } from "next/server";
 import OpenAI from "openai";
 
 class OpenAiService {
@@ -11,8 +10,8 @@ class OpenAiService {
     });
   }
 
-  public async createPrompt(prompt: string): Promise<{message:string,reply:string}>{
-    if (!this.openai) return {message:"openAi",reply:""};
+  public async createPrompt(prompt: string): Promise<{ message: string; reply: string }> {
+    if (!this.openai) return { message: "openAi", reply: "" };
     try {
       const response = await this.openai.chat.completions.create({
         model: "gpt-4o-mini",
@@ -28,19 +27,22 @@ class OpenAiService {
 
       const reply = response.choices[0]?.message?.content || "Sin respuesta";
 
-      /// Call endpoint for prompt and answer
-      return ({
+      // Call endpoint for prompt and answer
+      return {
         message: "Successfully",
         reply,
-      });
+      };
     } catch (error: unknown) {
-      console.log("Error to get chats");
-      return ({
+      // Log the error or handle it more meaningfully
+      console.error("Error to get chats:", error);
+      return {
         message: "chats",
         reply: "500",
-      });
+      };
     }
   }
 }
 
-export default new OpenAiService();
+// Assign the instance to a variable before exporting
+const openAiService = new OpenAiService();
+export default openAiService;

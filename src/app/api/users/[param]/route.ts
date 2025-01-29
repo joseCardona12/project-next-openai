@@ -1,20 +1,28 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(
-    request: NextRequest,
-    { params }: { params: { param: string } }
-) {
+export async function GET(request: NextRequest) {
     try {
-        const param = decodeURIComponent(params.param);
-        // Verificar si el parámetro es un email (contiene @)
-        const isEmail = param.includes('@');
+        
+        const url = new URL(request.url);
+        const param = url.pathname.split('/').pop();  // Extract the dynamic parameter from the URL
+
+        if (!param) {
+            return NextResponse.json({
+                message: "User parameter is missing",
+                status: 400
+            }, { status: 400 });
+        }
+
+        const decodedParam = decodeURIComponent(param);  // Decode param
+        // Check if the parameter is an email (contains @ symbol)
+        const isEmail = decodedParam.includes('@');
         console.log("is email", isEmail);
 
         const user = await prisma.user.findUnique({
             where: isEmail 
-                ? { email: param }
-                : { id: parseInt(param) },
+                ? { email: decodedParam }
+                : { id: parseInt(decodedParam) },
             select: {
                 id: true,
                 name: true,
