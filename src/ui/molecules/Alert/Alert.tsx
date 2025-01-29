@@ -11,8 +11,8 @@ export default function Alert(message: string, type: AlertType = 'info') {
     return MySwal.fire({
         title: <i>{message}</i>,
         icon: type,
-        iconColor: '#fbbf24',
-        confirmButtonColor: '#fbbf24',
+        iconColor: 'var(--color-purple)',
+        confirmButtonColor: 'var(--color-purple)',
         confirmButtonText: 'OK'
     });
 }

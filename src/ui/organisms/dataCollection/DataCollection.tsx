@@ -7,6 +7,7 @@ import StepThree from '@/ui/molecules/steps/stepThree';
 import StepFour from '@/ui/molecules/steps/stepFour';
 import StepFive from '@/ui/molecules/steps/stepFive';
 import "./dataCollection.styles.scss";
+import { Footer } from '../home/footer';
 
 
 const steps = [StepOne, StepTwo, StepThree, StepFour, StepFive,];
