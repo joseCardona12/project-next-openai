@@ -42,7 +42,7 @@ const LoginForm: React.FC = () => {
       user,
     });
     setLoading(false);
-    router.push("/firstHome");
+    router.push("/dashboard");
   };
 
   return (

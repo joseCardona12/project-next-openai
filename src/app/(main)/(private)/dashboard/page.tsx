@@ -1,12 +1,5 @@
-"use client"
-import Onboarding from "@/ui/molecules/steps/Onboarding";
-import { Footer } from "@/ui/organisms/home/footer";
+import { OnboardingTemplate } from "@/ui/template";
 
-export default function HomeView(){
-    return (
-        <div className="containergeneral">
-            <Onboarding/>
-            <Footer />
-        </div>
-    )
+export default function HomeView() {
+  return <OnboardingTemplate />;
 }

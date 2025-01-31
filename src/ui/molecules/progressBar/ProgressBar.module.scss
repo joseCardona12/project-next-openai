@@ -1,16 +1,15 @@
 .progressBar {
-    margin: 2rem auto;
-    width: 50%;
-    background-color: #d1d5db; /* bg-gray-300 */
-    border-radius: 9999px; /* Full rounded corners */
-    height: 18px; /* Height for the bar */
-    margin-bottom: 1.5rem; /* Margin bottom equivalent to mb-6 */
-  }
-  
-  .progress {
-    background-color: #752071; /* bg-yellow-500 */
-    height: 100%;
-    border-radius: 9999px; /* Match parent corners */
-    transition: width 0.3s ease-in-out; /* Smooth transition for width changes */
-  }
-  
+  margin: 2rem auto;
+  width: 50%;
+  background-color: #f1f1f1; /* bg-gray-300 */
+  border-radius: 9999px; /* Full rounded corners */
+  height: 18px; /* Height for the bar */
+  margin-bottom: 1.5rem; /* Margin bottom equivalent to mb-6 */
+}
+
+.progress {
+  background-color: var(--color-purple); /* bg-yellow-500 */
+  height: 100%;
+  border-radius: 9999px; /* Match parent corners */
+  transition: width 0.3s ease-in-out; /* Smooth transition for width changes */
+}
