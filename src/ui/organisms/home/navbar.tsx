@@ -21,7 +21,7 @@ export function Navbar() {
     return (
       <header className="bg-white border-b border-gray-200">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <NavLink href="/principalHome"><Logo/></NavLink>
+        <NavLink href="/firstHome"><Logo/></NavLink>
        
           <nav className="flex items-center space-x-6">
             <NavLink onClick={handleClick} href="#required-access">bot UI</NavLink>

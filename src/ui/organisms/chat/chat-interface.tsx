@@ -1,5 +1,4 @@
 "use client"
-
 import React, { useState } from "react";
 import { SendHorizontal } from "lucide-react";
 import { ChatBubble } from "@/ui/atoms/chat/chat-bubble";
