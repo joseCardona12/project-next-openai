@@ -16,7 +16,7 @@ interface Message {
   isAI: boolean;
 }
 
-const ChatInterface: React.FC = () => {
+export const ChatInterface: React.FC = () => {
   const { contextState } = useContextState((state) => state);
   const { setOpenAiResponse } = useOpenAiState((state) => state);
   const [target, current_level, age_range, day_week] = contextState;
