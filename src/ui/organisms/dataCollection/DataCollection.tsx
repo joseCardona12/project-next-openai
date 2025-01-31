@@ -6,6 +6,8 @@ import StepTwo from '@/ui/molecules/steps/stepTwo';
 import StepThree from '@/ui/molecules/steps/stepThree';
 import StepFour from '@/ui/molecules/steps/stepFour';
 import StepFive from '@/ui/molecules/steps/stepFive';
+import "./dataCollection.styles.scss";
+import { Footer } from '../home/footer';
 
 
 const steps = [StepOne, StepTwo, StepThree, StepFour, StepFive,];
@@ -21,9 +23,9 @@ const DataCollection: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 content">
       <ProgressBar step={currentStep} totalSteps={steps.length} />
-      <div className="w-full max-w-md">
+      <div className=" content-information">
         <StepComponent onNext={nextStep} />
       </div>
     </div>

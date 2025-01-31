@@ -1,7 +1,15 @@
-import LoginForm from "../organisms/auth/LoginForm"
+import { Navbar } from "@/ui/organisms";
+import LoginForm from "@/ui/organisms/auth/LoginForm";
+import { Footer } from "@/ui/organisms/home/footer";
 
 export const LoginTemplate = () => {
-    return (
-       <LoginForm/>
-    )
-}
+  return (
+    <div>
+      <Navbar />
+      <main>
+        <LoginForm />
+      </main>
+      <Footer />
+    </div>
+  );
+};

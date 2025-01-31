@@ -2,8 +2,6 @@ import styles from '../steps/Steps.module.scss';
 
 
 const Onboarding: React.FC = () => {
-
-
   return (
     <div className={styles.stepContainer}>
       <div className={styles.header}>
@@ -15,15 +13,10 @@ const Onboarding: React.FC = () => {
         <h2 className={styles.title}>Hello! I´m Jose iu</h2>
       </div>
       <div className={styles.optionsGrid}>
-       
-    
       </div>
       <button
-className={styles.continueButton}
-    
-        
+className={styles.continueButton}  
       >
-      
         <p>
          <a href="/collection">Continue</a>
           </p>

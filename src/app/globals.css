@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --background-color-purple: #8b3dff;
+  --color-purple: #8b3dff;
+  --color-purple-hover: #7534d8;
+  --color-black: #333;
+}

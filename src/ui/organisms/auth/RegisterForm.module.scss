@@ -2,15 +2,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background-color: #f3f4f6;
+  min-height: 78vh;
 }
 
 .card {
   background: #fff;
   padding: 2rem;
   border-radius: 0.75rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   width: 22rem;
   text-align: center;
 }
@@ -22,7 +21,7 @@
   margin-bottom: 0.5rem;
 
   span {
-    color: #fbbf24;
+    color: var(--color-purple);
     font-weight: bold;
   }
 }
@@ -30,7 +29,7 @@
 .header h1 {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #fbbf24;
+  color: var(--color-purple);
 }
 
 .inputGroup {
@@ -49,8 +48,8 @@
     transition: border-color 0.3s;
 
     &:focus {
-      border-color: #fbbf24;
-      box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.3);
+      border-color: var(--color-purple);
+      box-shadow: 0 0 0 3px rgba(228, 67, 228, 0.3);
     }
   }
 
@@ -59,13 +58,13 @@
     top: 50%;
     right: 0.75rem;
     transform: translateY(-50%);
-    color: #fbbf24;
+    color: var(--color-purple);
   }
 }
 
 .button {
   width: 100%;
-  background-color: #fbbf24;
+  background-color: var(--color-purple);
   color: #fff;
   padding: 0.5rem;
   border: none;
@@ -76,7 +75,7 @@
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: #f59e0b;
+    background-color: var(--color-purple-hover);
   }
 }
 
@@ -86,13 +85,13 @@
   color: #6b7280;
 
   a {
-    color: #fbbf24;
+    color: var(--color-purple);
     font-weight: bold;
     text-decoration: none;
     transition: color 0.3s;
 
     &:hover {
-      color: #f59e0b;
+      color: var(--color-purple-hover);
     }
   }
 }

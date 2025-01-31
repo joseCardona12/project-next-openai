@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState, useEffect } from "react";
 import { useContextState, useOpenAiState, useUserState } from "@/app/core/application/global-state";
 import { OpenAiService } from "@/app/infrastructure/services";
