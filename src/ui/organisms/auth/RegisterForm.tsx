@@ -1,43 +1,48 @@
-"use client"
-import React, { useState } from 'react';
-import styles from './RegisterForm.module.scss';
-import { AuthService } from '@/app/infrastructure/services';
-import { useRouter } from 'next/navigation';
-import { inputAlert } from '@/ui/molecules';
+"use client";
+import React, { useState } from "react";
+import styles from "./RegisterForm.module.scss";
+import { AuthService } from "@/app/infrastructure/services";
+import { useRouter } from "next/navigation";
+import { inputAlert } from "@/ui/molecules";
 
 interface IRegisterForm {
-  name:string,
-  email:string,
-  password:string,
+  name: string;
+  email: string;
+  password: string;
 }
 const RegisterForm: React.FC = () => {
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const [registerData, setRegisterData] = useState<IRegisterForm>({
-    name:'',
-    email:'',
-    password:''
+    name: "",
+    email: "",
+    password: "",
   });
   const router = useRouter();
 
-  const handleRegister = async (e: React.FormEvent):Promise<void> => {
+  const handleRegister = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
 
     const userRegistered = await AuthService.register({
       ...registerData,
       gender_id: 1,
     });
     console.log(userRegistered);
-    if("code" in userRegistered){
-      inputAlert("User exists!","error");
+    if ("code" in userRegistered) {
+      inputAlert("User exists!", "error");
       setLoading(false);
       return;
     }
-    inputAlert("Created user successfully","success");
-    router.push('/login');
+    inputAlert("Created user successfully", "success");
+    router.push("/login");
     setLoading(false);
+  };
+
+  const togglePasswordVisibility = (): void => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -47,18 +52,20 @@ const RegisterForm: React.FC = () => {
           <h2>
             WELCOME TO <span>SMART UI</span>
           </h2>
-          <h1>REGISTER</h1>
+          <h1>Sign Up</h1>
         </div>
         <form onSubmit={handleRegister}>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-          
+          {error && <p style={{ color: "red" }}>{error}</p>}
+
           <div className={styles.inputGroup}>
             <input
               type="text"
               id="name"
               placeholder="Name"
               value={registerData.name}
-              onChange={(e) => setRegisterData({ ...registerData, name: e.target.value })}
+              onChange={(e) =>
+                setRegisterData({ ...registerData, name: e.target.value })
+              }
               required
             />
             <span className={styles.icon}>
@@ -73,7 +80,7 @@ const RegisterForm: React.FC = () => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M16 12A4 4 0 118 12a4 4 0 018 0zM12 14v6m4-6a4 4 0 11-8 0"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                 />
               </svg>
             </span>
@@ -85,7 +92,9 @@ const RegisterForm: React.FC = () => {
               id="email"
               placeholder="Email"
               value={registerData.email}
-              onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
+              onChange={(e) =>
+                setRegisterData({ ...registerData, email: e.target.value })
+              }
               required
             />
             <span className={styles.icon}>
@@ -100,7 +109,7 @@ const RegisterForm: React.FC = () => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M16 12A4 4 0 118 12a4 4 0 018 0zM2 6l10 7L22 6"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                 />
               </svg>
             </span>
@@ -108,14 +117,20 @@ const RegisterForm: React.FC = () => {
 
           <div className={styles.inputGroup}>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               placeholder="Password"
               value={registerData.password}
-              onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
+              onChange={(e) =>
+                setRegisterData({ ...registerData, password: e.target.value })
+              }
               required
             />
-            <span className={styles.icon}>
+            <span
+              className={styles.icon}
+              onClick={togglePasswordVisibility}
+              style={{ cursor: "pointer" }}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -127,19 +142,19 @@ const RegisterForm: React.FC = () => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M12 11c3.5 0 4.5 2 4.5 3.5 0 1.5-1.5 2.5-3 2.5s-3-1-3-2.5c0-1.5 1-3.5 3.5-3.5zM8 12.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm10 0a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
                 />
               </svg>
             </span>
           </div>
 
           <button type="submit" className={styles.button} disabled={loading}>
-            {loading ? 'Cargando...' : 'REGISTER'}
+            {loading ? "Cargando..." : "REGISTER"}
           </button>
         </form>
         <div className={styles.footer}>
           <p>
-            DO I ALREADY HAVE AN ACCOUNT? <a href="/login">Sign in</a>
+            Have an account? <a href="/login">Sign in</a>
           </p>
         </div>
       </div>

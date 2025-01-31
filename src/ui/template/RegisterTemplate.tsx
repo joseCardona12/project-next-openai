@@ -1,7 +1,14 @@
-import RegisterForm from "../organisms/auth/RegisterForm"
+import { Footer, Navbar } from "@/ui/organisms"
+import RegisterForm from "@/ui/organisms/auth/RegisterForm"
 
 export const RegisterTemplate = () => {
     return (
-        <RegisterForm/>
+        <div>
+        <Navbar />
+        <main>
+          <RegisterForm />
+        </main>
+        <Footer />
+      </div>
     )
 }
