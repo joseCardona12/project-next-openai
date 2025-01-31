@@ -24,8 +24,8 @@ const ContextPush: React.FC = () => {
           src="/img/joseui.png"
           alt="Jose Iu Smart"
           className={styles.icon}
-          width={400} // Ajusta el ancho
-          height={400} // Ajusta el alto
+          width={400} 
+          height={400} 
         />
       </div>
       <button className={styles.continueButton}>
