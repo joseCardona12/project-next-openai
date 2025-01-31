@@ -1,18 +1,32 @@
-import { IOpenAiRequest, IOpenAiResponseReply, IOpenAiResponseStatus } from "@/app/core/application/dto";
-import { ClientHttpUtil } from "../utils"
+import {
+  IOpenAiRequest,
+  IOpenAiResponseReply,
+  IOpenAiResponseStatus,
+} from "@/app/core/application/dto";
+import { ClientHttpUtil } from "../utils";
 
 class OpenAiService {
-    private clientHttpUtil: ClientHttpUtil;
+  private clientHttpUtil: ClientHttpUtil;
 
-    constructor(){
-        this.clientHttpUtil = new ClientHttpUtil();
-    };
+  constructor() {
+    this.clientHttpUtil = new ClientHttpUtil();
+  }
 
-    public async createPromptAPi(prompt:string, token:string):Promise<IOpenAiResponseStatus | IOpenAiResponseReply>{
-        return await this.clientHttpUtil.post<IOpenAiResponseStatus | IOpenAiResponseReply, IOpenAiRequest>("openAi", {prompt}, {
-            Authorization: `Bearer ${token}`
-        });
-    }
+  public async createPromptAPi(
+    prompt: string,
+    token: string
+  ): Promise<IOpenAiResponseStatus | IOpenAiResponseReply> {
+    return await this.clientHttpUtil.post<
+      IOpenAiResponseStatus | IOpenAiResponseReply,
+      IOpenAiRequest
+    >(
+      "openAi",
+      { prompt },
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
+  }
 }
 
 export default new OpenAiService();

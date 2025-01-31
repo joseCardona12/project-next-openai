@@ -1,32 +1,35 @@
 import { ClientHttpPort } from "@/app/core/application/ports";
 
 export class ClientHttpUtil implements ClientHttpPort {
-  private protocol: string = "https";
-  private host: string = "project-next-openai.vercel.app"; 
+  // private protocol: string = "https";
+  // private host: string = "project-next-openai.vercel.app";
   private baseUrl: string;
 
   constructor(protocolClient?: string, hostClient?: string) {
-    this.protocol = protocolClient || this.protocol;
-    this.host = hostClient || this.host;
-    this.baseUrl = `${this.protocol}://${this.host}/api`;
-  };
+    // this.protocol = protocolClient || this.protocol;
+    // this.host = hostClient || this.host;
+    // this.baseUrl = `${this.protocol}://${this.host}/api`;
+    this.baseUrl = `/api`;
+  }
 
-  private getHeaders(headers: Record<string, string> = {}): Record<string, string> {
+  private getHeaders(
+    headers: Record<string, string> = {}
+  ): Record<string, string> {
     return {
       "Content-Type": "application/json",
-      ...headers
+      ...headers,
     };
-  };
+  }
 
   private async managementError<T>(response: Response): Promise<T> {
-      if (!response.ok) {
-        return ({
-          message: "Opps. There is an Error with response",
-          code: response.status
-        }) as T;
-      }
-      return await response.json();
-  };
+    if (!response.ok) {
+      return {
+        message: "Opps. There is an Error with response",
+        code: response.status,
+      } as T;
+    }
+    return await response.json();
+  }
 
   public fetchApi = async <B>(
     path: string,
@@ -34,10 +37,10 @@ export class ClientHttpUtil implements ClientHttpPort {
     method: string,
     bodyClient?: B
   ): Promise<Response> => {
-    console.log('Making request to:', `${this.baseUrl}/${path}`);
-    console.log('Request headers:', headers);
-    console.log('Request method:', method);
-    console.log('Request body:', bodyClient);
+    console.log("Making request to:", `${this.baseUrl}/${path}`);
+    console.log("Request headers:", headers);
+    console.log("Request method:", method);
+    console.log("Request body:", bodyClient);
 
     const response = await fetch(`${this.baseUrl}/${path}`, {
       headers,
@@ -45,7 +48,7 @@ export class ClientHttpUtil implements ClientHttpPort {
       body: bodyClient ? JSON.stringify(bodyClient) : undefined,
       cache: "no-store",
     });
-    console.log('Response:', response);
+    console.log("Response:", response);
     return response;
   };
 
@@ -53,24 +56,28 @@ export class ClientHttpUtil implements ClientHttpPort {
     const headers: Record<string, string> = this.getHeaders();
     const response = await this.fetchApi(path, headers, "GET");
     return await this.managementError(response);
-  };
+  }
 
-  public async post<T, B>(path: string, body: B, headersClient?: Record<string, string>): Promise<T> {
+  public async post<T, B>(
+    path: string,
+    body: B,
+    headersClient?: Record<string, string>
+  ): Promise<T> {
     const headers: Record<string, string> = this.getHeaders(headersClient);
     console.log(headers);
     const response = await this.fetchApi(path, headers, "POST", body);
     return await this.managementError(response);
-  };
+  }
 
   public async put<T, B>(path: string, body: B): Promise<T> {
     const headers: Record<string, string> = this.getHeaders();
     const response = await this.fetchApi(path, headers, "PUT", body);
     return await this.managementError(response);
-  };
+  }
 
   public async delete<T>(path: string): Promise<T> {
     const headers: Record<string, string> = this.getHeaders();
     const response = await this.fetchApi(path, headers, "DELETE");
     return await this.managementError(response);
-  };
-};
+  }
+}
