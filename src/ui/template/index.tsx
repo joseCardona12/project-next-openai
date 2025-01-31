@@ -1,3 +1,5 @@
 import { TermTemplate } from "./TermsTemplate/TermsTemplate";
+import PrivacityTemplate from "./PrivacityTemplate/PrivacityTemplate";
+import PricesTemplate from "./PricesTemplate/PricesTemplate";
 
-export { TermTemplate };
+export { TermTemplate, PrivacityTemplate, PricesTemplate };

@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root {
-    --background-color-purple: #8B3DFF;
-    --color-purple: #8B3DFF;
+  --background-color-purple: #8b3dff;
+  --color-purple: #8b3dff;
+  --color-black: #333;
 }
