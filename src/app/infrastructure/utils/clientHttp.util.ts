@@ -1,8 +1,8 @@
 import { ClientHttpPort } from "@/app/core/application/ports";
 
 export class ClientHttpUtil implements ClientHttpPort {
-  private protocol: string = "http";
-  private host: string = "localhost:3000"; 
+  private protocol: string = "https";
+  private host: string = "project-next-openai.vercel.app"; 
   private baseUrl: string;
 
   constructor(protocolClient?: string, hostClient?: string) {

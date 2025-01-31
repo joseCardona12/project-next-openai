@@ -1,4 +1,3 @@
--- Clear
 -- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
