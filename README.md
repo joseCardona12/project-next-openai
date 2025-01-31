@@ -24,12 +24,18 @@ src/
 │   │   │   ├── dto/     # Data Transfer Objects
 │   │   │   ├── ports/   # Interfaces
 │   │   │   └── state/   # Estado global
-│   ├── infrastructure/   # Implementaciones concretas
+|   |   |   |-- hooks/   # funciones especiales
+|   |   |   |-- interfaces/ # Modelos y/o contratos 
+|   |   |   |-- utils/  # Métodos auxiliadoras.
+│   ├── infrastructure/   # Implementaciones externas
 │   │   └── services/    # Servicios de infraestructura
-├── lib/                  # Utilidades y configuraciones
-└── ui/                   # Componentes de UI
+|   |   |-- utils/       # Métodos auxiliadores
+├── lib/                 # Utilidades y configuraciones
+└── ui/                  # Componentes de UI
+    |-- atoms/           # Componentes unidad más pequeña
     ├── molecules/       # Componentes moleculares
     └── organisms/       # Componentes organizacionales
+    |-- template/        # Estructura general de la vista
 ```
 
 ## Modelos de Datos
@@ -54,12 +60,15 @@ src/
   - React 19.0.0
   - SASS para estilos
   - Zustand para gestión de estado
+  - Tailwind
 
 - **Backend**:
   - Next.js API Routes
   - Prisma ORM
   - PostgreSQL
   - JSON Web Tokens (JWT)
+  - bcrypt
+  - openAI
 
 - **Herramientas de Desarrollo**:
   - TypeScript
@@ -79,7 +88,7 @@ JWT_KEY=tu_clave_secreta_jwt
 
 1. **Clonar el repositorio**:
 ```bash
-git clone [URL_DEL_REPOSITORIO]
+git clone https://github.com/joseCardona12/project-next-openai
 cd project-next-openai
 ```
 
@@ -121,6 +130,9 @@ El sistema utiliza JWT para la autenticación. El flujo es el siguiente:
 - `POST /api/auth/login`: Inicio de sesión
 - `POST /api/context`: Creación de contexto de entrenamiento
 - `POST /api/answer`: Generación de respuestas con OpenAI
+- `POST /api/openAi`: Conexión con openAi
+- `POST /api/prompt`: Creación de las preguntas
+- `POST /api/users`: Crud del modelo users
 
 ## 🐳 Ejecutar con Docker
 
