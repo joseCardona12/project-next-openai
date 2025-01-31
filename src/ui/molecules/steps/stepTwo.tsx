@@ -29,12 +29,13 @@ const StepTwo: React.FC<StepProps> = ({ onNext }) => {
   return (
     <div className={styles.stepContainer}>
       <div className={styles.header}>
-        <Image
+      <Image
           src="/img/joseui.png"
           alt="Jose Iu Smart"
           className={styles.icon}
-          width={150} // Ajusta el ancho
-          height={150} // Ajusta el alto
+          layout="responsive"
+          width={150}  // Mantenemos la relación de aspecto
+          height={150}
         />
 
         <h2 className={styles.title}>

@@ -40,7 +40,7 @@ export const ChatInterface: React.FC = () => {
       const aiMessage = dataReply.reply.trim();
 
       setMessages((prev) => [...prev, { content: aiMessage, isAI: true }]);
-      setOpenAiResponse(dataReply); // Actualiza la respuesta de OpenAI en el estado global
+      setOpenAiResponse(dataReply); 
     } catch (error) {
       console.error("Error al obtener la respuesta de la IA:", error);
     } finally {
@@ -49,13 +49,13 @@ export const ChatInterface: React.FC = () => {
   };
 
   return (
-    <div className="bg-white w-full max-w-2xl mx-auto h-[600px] flex flex-col rounded-lg shadow-md rounded-xl">
+    <div className="bg-white w-full max-w-2xl mx-auto h-[600px] flex flex-col  shadow-md rounded-xl">
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.map((message, index) => (
           <ChatBubble
             key={index}
             content={message.content}
-            isAI={message.isAI}
+            isAI={message.isAI} 
           />
         ))}
 
