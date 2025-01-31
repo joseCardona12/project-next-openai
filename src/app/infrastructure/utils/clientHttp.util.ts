@@ -5,7 +5,7 @@ export class ClientHttpUtil implements ClientHttpPort {
   // private host: string = "project-next-openai.vercel.app";
   private baseUrl: string;
 
-  constructor(protocolClient?: string, hostClient?: string) {
+  constructor() {
     // this.protocol = protocolClient || this.protocol;
     // this.host = hostClient || this.host;
     // this.baseUrl = `${this.protocol}://${this.host}/api`;
