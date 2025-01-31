@@ -6,9 +6,29 @@
   padding: 2rem;
   border-radius: 1rem;
   width: 100%;
-  max-width: 600px;
   margin: 0 auto;
   border: 1px solid #dbdbdb;
+
+  @media (max-width: 1600px) {
+    max-width: 900px;
+  }
+
+  @media (max-width: 1200px) {
+    max-width: 800px;
+  }
+
+  @media (max-width: 1024px) {
+    max-width: 700px;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    padding: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+  }
 }
 
 .header {
@@ -18,7 +38,10 @@
   gap: 0.5rem;
 
   .icon {
-    width: 40%;
+    width: 100%; 
+    max-width: 150px; 
+    height: auto; 
+    object-fit: cover; 
   }
 
   .title {
@@ -29,6 +52,26 @@
     color: #4a4a4a;
     padding: 12px;
   }
+
+  @media (max-width: 768px) {
+    .icon {
+      width: 30%;
+    }
+
+    .title {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .icon {
+      width: 25%;
+    }
+
+    .title {
+      font-size: 0.85rem;
+    }
+  }
 }
 
 .optionsGrid {
@@ -37,6 +80,18 @@
   gap: 1rem;
   width: 100%;
   margin-bottom: 3rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (max-width: 768px) {
+    gap: 0.5rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.3rem;
+  }
 }
 
 .optionButton {
@@ -58,6 +113,16 @@
     background-color: #6b46c1;
     color: #ffffff;
     border-color: #6b46c1;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    padding: 0.8rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+    padding: 0.6rem;
   }
 }
 
@@ -81,5 +146,15 @@
     background-color: #e5e7eb;
     color: #a1a1aa;
     cursor: not-allowed;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    padding: 0.6rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    padding: 0.5rem;
   }
 }
