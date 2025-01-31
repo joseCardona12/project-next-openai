@@ -124,7 +124,7 @@ const LoginForm: React.FC = () => {
         </form>
         <div className={styles.footer}>
           <p>
-            Don't have an account? <a href="/register">Sign up</a>
+            Don{"'"}t have an account? <a href="/register">Sign up</a>
           </p>
         </div>
       </div>
