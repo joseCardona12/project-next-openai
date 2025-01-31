@@ -1,4 +1,4 @@
-import { ChatInterface } from "@/ui/organisms/chat/chat-interface"
+import  ChatInterface  from "@/ui/organisms/chat/chat-interface"
 import { Navbar } from "@/ui/organisms/home/navbar"
 
 export default function Home() {
