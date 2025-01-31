@@ -1,4 +1,4 @@
-# Next.js OpenAI Fitness Assistant
+# SMART UI
 
 Este proyecto es una aplicación web moderna construida con Next.js que utiliza la API de OpenAI para proporcionar asistencia personalizada en el ámbito del fitness y el entrenamiento físico.
 
@@ -19,13 +19,13 @@ El proyecto sigue una arquitectura limpia (Clean Architecture) con la siguiente 
 src/
 ├── app/
 │   ├── api/              # API routes de Next.js
-│   ├── core/            
+│   ├── core/
 │   │   ├── application/  # Lógica de aplicación
 │   │   │   ├── dto/     # Data Transfer Objects
 │   │   │   ├── ports/   # Interfaces
 │   │   │   └── state/   # Estado global
 |   |   |   |-- hooks/   # funciones especiales
-|   |   |   |-- interfaces/ # Modelos y/o contratos 
+|   |   |   |-- interfaces/ # Modelos y/o contratos
 |   |   |   |-- utils/  # Métodos auxiliadoras.
 │   ├── infrastructure/   # Implementaciones externas
 │   │   └── services/    # Servicios de infraestructura
@@ -56,6 +56,7 @@ src/
 ## Tecnologías Utilizadas
 
 - **Frontend**:
+
   - Next.js 15.1.4
   - React 19.0.0
   - SASS para estilos
@@ -63,6 +64,7 @@ src/
   - Tailwind
 
 - **Backend**:
+
   - Next.js API Routes
   - Prisma ORM
   - PostgreSQL
@@ -76,6 +78,10 @@ src/
   - Prisma CLI
   - ts-node
 
+- **Herramienta para la gestión de tareas**:
+  - Azure Devops
+  - Jira
+
 ## Variables de Entorno Requeridas
 
 ```env
@@ -87,17 +93,20 @@ JWT_KEY=tu_clave_secreta_jwt
 ## Cómo Ejecutar el Proyecto
 
 1. **Clonar el repositorio**:
+
 ```bash
 git clone https://github.com/joseCardona12/project-next-openai
 cd project-next-openai
 ```
 
 2. **Instalar dependencias**:
+
 ```bash
 npm install
 ```
 
 3. **Configurar la base de datos**:
+
 ```bash
 npx prisma generate
 npx prisma db push
@@ -105,6 +114,7 @@ npx prisma db seed
 ```
 
 4. **Iniciar el servidor de desarrollo**:
+
 ```bash
 npm run dev
 ```
@@ -137,27 +147,32 @@ El sistema utiliza JWT para la autenticación. El flujo es el siguiente:
 ## 🐳 Ejecutar con Docker
 
 ### Prerequisitos
+
 - Docker
 - Docker Compose
 
 ### Pasos para ejecutar con Docker
 
 1. **Construir y levantar los contenedores**:
+
 ```bash
 docker-compose up --build
 ```
 
 2. **Para ejecutar en segundo plano**:
+
 ```bash
 docker-compose up -d
 ```
 
 3. **Para ver los logs**:
+
 ```bash
 docker-compose logs -f
 ```
 
 4. **Para detener los contenedores**:
+
 ```bash
 docker-compose down
 ```
@@ -165,21 +180,25 @@ docker-compose down
 ### Comandos Docker útiles
 
 - **Reiniciar los contenedores**:
+
 ```bash
 docker-compose restart
 ```
 
 - **Ver el estado de los contenedores**:
+
 ```bash
 docker-compose ps
 ```
 
 - **Ejecutar comandos en el contenedor de la aplicación**:
+
 ```bash
 docker-compose exec app sh
 ```
 
 - **Ver logs de un servicio específico**:
+
 ```bash
 docker-compose logs -f app  # para la aplicación
 docker-compose logs -f db   # para la base de datos

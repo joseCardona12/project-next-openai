@@ -38,24 +38,20 @@ const Home: React.FC = () => {
     const promptApi = async (): Promise<void> => {
       const prompt: string = UtilApplication.createPrompt(target, current_level, age_range, day_week);
       try {
-        // Llama al servicio de OpenAI
         const dataOpenAi: IOpenAiResponseStatus | IOpenAiResponseReply =
           await OpenAiService.createPromptAPi(prompt, user?.token || "");
   
-        // Actualiza el estado con la respuesta
         const dataReply = dataOpenAi as IOpenAiResponseReply;
         setOpenAiResponse(dataReply);
   
-        // Limpia y parsea el JSON
-        let cleanReply = dataReply.reply.trim(); // Elimina espacios en blanco al inicio y final
+        let cleanReply = dataReply.reply.trim(); 
         if (cleanReply.startsWith("```json")) {
-          cleanReply = cleanReply.replace(/```json/g, "").replace(/```/g, ""); // Elimina bloques de Markdown
+          cleanReply = cleanReply.replace(/```json/g, "").replace(/```/g, "");
         }
   
         const exerciseJson: IExercise[] = JSON.parse(cleanReply); // Parsea el JSON limpio
         setExercises(exerciseJson);
   
-        // Llama al servicio de prompts
         const dataPrompt: IPromptResponseError | IPromptResponseSuccess =
           await PromptService.postPrompt(prompt, user?.token || "");
   
@@ -64,7 +60,7 @@ const Home: React.FC = () => {
       } catch (error) {
         console.error("Error fetching prompt data:", error);
       } finally {
-        setLoading(false); // Finaliza la carga
+        setLoading(false);
       }
     };
   
